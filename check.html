@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eligibility Check – Nyota Fund Guide</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+      min-height: 100vh;
+      background: 
+        linear-gradient(rgba(246, 247, 249, 0.9), rgba(246, 247, 249, 0.95)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%230b7a43" opacity="0.05" d="M50,0 L100,50 L50,100 L0,50 Z M30,30 L70,30 L70,70 L30,70 Z"/></svg>');
+      background-repeat: repeat;
+      background-size: 100px 100px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0b7a43 0%, #095c33 100%);
+      color: #fff;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(11, 122, 67, 0.2);
+    }
+
+    header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .container {
+      padding: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .question {
+      background: #fff;
+      padding: 16px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      border-left: 4px solid #0b7a43;
+    }
+
+    .question p {
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 0;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    label:hover {
+      background: #f8f9fa;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+      accent-color: #0b7a43;
+      transform: scale(1.1);
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(to right, #0b7a43, #0a8c4c);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(11, 122, 67, 0.3);
+      transition: all 0.2s;
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 6px rgba(11, 122, 67, 0.3);
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 15px;
+      display: none;
+      animation: fadeIn 0.5s;
+      border: 1px solid;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success {
+      background: #e6f4ec;
+      color: #0b7a43;
+      border-color: #a3d9b5;
+    }
+
+    .fail {
+      background: #fdecea;
+      color: #b00020;
+      border-color: #f5c6c6;
+    }
+
+    .recommendations {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 16px;
+      text-align: center;
+      line-height: 1.5;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 6px;
+    }
+
+    .ad-box {
+      margin-top: 20px;
+      padding: 14px;
+      background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+      text-align: center;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #495057;
+      border: 1px solid #ced4da;
+      font-weight: 500;
+    }
+
+    .score-display {
+      text-align: center;
+      margin: 15px 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: #e9ecef;
+      border-radius: 3px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #0b7a43;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Nyota Fund Eligibility Check</h2>
+</header>
+
+<div class="container">
+
+  <div class="question">
+    <p>1. Are you a Kenyan citizen aged between 18 and 35 years (Youth) or any woman above 18?</p>
+    <label><input type="radio" name="q1" value="yes"> Yes, I meet the age/gender criteria</label>
+    <label><input type="radio" name="q1" value="no"> No, I don't meet these criteria</label>
+  </div>
+
+  <div class="question">
+    <p>2. Do you have a valid Kenyan National ID?</p>
+    <label><input type="radio" name="q2" value="yes"> Yes, I have a valid ID</label>
+    <label><input type="radio" name="q2" value="no"> No, I don't have a valid ID</label>
+  </div>
+
+  <div class="question">
+    <p>3. Do you have a registered business or a viable business idea with a plan?</p>
+    <label><input type="radio" name="q3" value="yes"> Yes, I have a registered business</label>
+    <label><input type="radio" name="q3" value="partial"> I have a business idea with plan</label>
+    <label><input type="radio" name="q3" value="no"> No business or idea yet</label>
+  </div>
+
+  <div class="question">
+    <p>4. Is your business located and operating within Kenya?</p>
+    <label><input type="radio" name="q4" value="yes"> Yes, business operates in Kenya</label>
+    <label><input type="radio" name="q4" value="no"> No, business operates elsewhere</label>
+  </div>
+
+  <div class="question">
+    <p>5. Have you undergone entrepreneurship training (e.g., Ajira Digital, KUZA)?</p>
+    <label><input type="radio" name="q5" value="yes"> Yes, completed training</label>
+    <label><input type="radio" name="q5" value="planned"> Planning to attend</label>
+    <label><input type="radio" name="q5" value="no"> No training</label>
+  </div>
+
+  <div class="question">
+    <p>6. Do you have a bank account in your name?</p>
+    <label><input type="radio" name="q6" value="yes"> Yes, active bank account</label>
+    <label><input type="radio" name="q6" value="no"> No bank account</label>
+  </div>
+
+  <div class="question">
+    <p>7. Can you provide two guarantors with valid Kenyan IDs?</p>
+    <label><input type="radio" name="q7" value="yes"> Yes, available</label>
+    <label><input type="radio" name="q7" value="partial"> One guarantor available</label>
+    <label><input type="radio" name="q7" value="no"> No guarantors</label>
+  </div>
+
+  <div class="question">
+    <p>8. Are you applying as an individual or as a group (3-10 members)?</p>
+    <label><input type="radio" name="q8" value="individual"> Individual applicant</label>
+    <label><input type="radio" name="q8" value="group"> Group application</label>
+    <label><input type="radio" name="q8" value="neither"> Not sure yet</label>
+  </div>
+
+  <div class="score-display">
+    Your eligibility score: <span id="scoreValue">0</span>/10
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <button onclick="showInterstitialAndCheck()">Check Eligibility</button>
+
+  <div id="resultBox" class="result"></div>
+
+  <p class="note">
+    <strong>Note:</strong> This is a preliminary eligibility assessment. Final approval is determined by Nyota Fund officials. Required documents may include: National ID, KRA PIN, business registration certificate, business plan, and guarantor details.
+  </p>
+
+  <!-- Native Ad Placeholder -->
+  <div class="ad-box">
+    Advertisement
+  </div>
+
+</div>
+
+<script>
+  function showInterstitialAndCheck() {
+    // Median will handle interstitial automatically
+    if (typeof median !== "undefined" && median.showInterstitial) {
+      median.showInterstitial(); // Show Ad before result
+      // Call checkEligibility after ad (if ad supports callback)
+      setTimeout(checkEligibility, 1000);
+    } else {
+      checkEligibility(); // Your existing function
+    }
+  }
+
+  function checkEligibility() {
+    const questions = ['q1','q2','q3','q4','q5','q6','q7','q8'];
+    let score = 0;
+    let totalPossible = 10;
+    let allAnswered = true;
+
+    // Check all questions answered
+    for (let q of questions) {
+      const selected = document.querySelector('input[name="'+q+'"]:checked');
+      if (!selected) {
+        allAnswered = false;
+        break;
+      }
+    }
+
+    if (!allAnswered) {
+      alert('Please answer all questions before checking eligibility');
+      return;
+    }
+
+    // Calculate score
+    const answers = {};
+    questions.forEach(q => {
+      answers[q] = document.querySelector('input[name="'+q+'"]:checked').value;
+    });
+
+    // Scoring logic
+    if (answers.q1 === 'yes') score += 2;
+    if (answers.q2 === 'yes') score += 2;
+    if (answers.q3 === 'yes') score += 2;
+    if (answers.q3 === 'partial') score += 1;
+    if (answers.q4 === 'yes') score += 1;
+    if (answers.q5 === 'yes') score += 1;
+    if (answers.q6 === 'yes') score += 1;
+    if (answers.q7 === 'yes') score += 1;
+    if (answers.q7 === 'partial') score += 0.5;
+    if (answers.q8 === 'individual' || answers.q8 === 'group') score += 1;
+
+    // Update progress display
+    const progress = (score / totalPossible) * 100;
+    document.getElementById('scoreValue').textContent = score.toFixed(1);
+    document.getElementById('progressFill').style.width = progress + '%';
+
+    // Show result
+    const resultBox = document.getElementById('resultBox');
+    resultBox.style.display = 'block';
+
+    let recommendations = '';
+    
+    if (score >= 8) {
+      resultBox.className = 'result success';
+      resultBox.innerHTML = `
+        <strong>✅ High Eligibility Potential</strong><br><br>
+        Based on your answers (${score.toFixed(1)}/${totalPossible} points), you have strong potential to qualify for Nyota Fund.
+        <div class="recommendations">
+          <strong>Next Steps:</strong><br>
+          1. Prepare your business plan<br>
+          2. Gather required documents<br>
+          3. Visit your nearest Huduma Centre<br>
+          4. Apply through official channels
+        </div>
+      `;
+    } else if (score >= 5) {
+      resultBox.className = 'result success';
+      resultBox.innerHTML = `
+        <strong>⚠️ Moderate Eligibility</strong><br><br>
+        Based on your answers (${score.toFixed(1)}/${totalPossible} points), you may qualify but need to address some requirements.
+        <div class="recommendations">
+          <strong>Recommendations:</strong><br>
+          1. Complete entrepreneurship training<br>
+          2. Register your business<br>
+          3. Open a bank account<br>
+          4. Find suitable guarantors
+        </div>
+      `;
+    } else {
+      resultBox.className = 'result fail';
+      resultBox.innerHTML = `
+        <strong>❌ Low Eligibility Score</strong><br><br>
+        Based on your answers (${score.toFixed(1)}/${totalPossible} points), you currently don't meet the basic requirements.
+        <div class="recommendations">
+          <strong>Improvement Areas:</strong><br>
+          1. Ensure you meet age/gender criteria<br>
+          2. Get a valid Kenyan ID<br>
+          3. Develop a business idea with plan<br>
+          4. Consider entrepreneurship training
+        </div>
+      `;
+    }
+
+    // Scroll to result
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Update score as user answers questions
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      // Update score display without full check
+      const questions = ['q1','q2','q3','q4','q5','q6','q7','q8'];
+      let tempScore = 0;
+      let allAnswered = true;
+
+      questions.forEach(q => {
+        const selected = document.querySelector('input[name="'+q+'"]:checked');
+        if (selected) {
+          const value = selected.value;
+          // Simplified scoring for live update
+          if (value === 'yes') tempScore += (q === 'q1' || q === 'q2' || q === 'q3') ? 2 : 1;
+          if (value === 'partial') tempScore += 0.5;
+          if (value === 'individual' || value === 'group') tempScore += 1;
+        } else {
+          allAnswered = false;
+        }
+      });
+
+      if (allAnswered) {
+        const progress = (tempScore / 10) * 100;
+        document.getElementById('scoreValue').textContent = tempScore.toFixed(1);
+        document.getElementById('progressFill').style.width = progress + '%';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
