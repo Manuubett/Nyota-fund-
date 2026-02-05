@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Ideas for Nyota Fund – Nyota Fund Guide</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --primary: #0b7a43;
+    --primary-dark: #095c33;
+    --secondary: #4caf50;
+    --accent: #ff9800;
+    --accent-dark: #e65100;
+    --light: #f8f9fa;
+    --dark: #333;
+    --gray: #666;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f9f4 0%, #e6f4ec 100%);
+    color: var(--dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(11, 122, 67, 0.3);
+    position: relative;
+  }
+
+  .header-content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .tagline {
+    font-size: 16px;
+    opacity: 0.95;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .location-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .location-btn {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+
+  .location-btn:hover, .location-btn.active {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .container {
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .filter-section {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+  }
+
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .filter-group {
+    margin-bottom: 15px;
+  }
+
+  .filter-label {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: block;
+    font-size: 15px;
+  }
+
+  select, input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #fafafa;
+    transition: all 0.3s;
+  }
+
+  select:focus, input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(11, 122, 67, 0.1);
+  }
+
+  .idea-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+
+  .idea-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid transparent;
+  }
+
+  .idea-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .idea-header {
+    padding: 25px;
+    background: linear-gradient(135deg, var(--primary-light) 0%, #e6f4ec 100%);
+    position: relative;
+  }
+
+  .idea-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .idea-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .idea-location {
+    display: inline-block;
+    background: rgba(11, 122, 67, 0.1);
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+
+  .idea-content {
+    padding: 0 25px 25px;
+  }
+
+  .idea-detail {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .detail-icon {
+    color: var(--primary);
+    font-size: 16px;
+    min-width: 20px;
+    margin-top: 3px;
+  }
+
+  .detail-label {
+    font-weight: 600;
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 3px;
+    display: block;
+  }
+
+  .detail-value {
+    font-size: 15px;
+    color: var(--dark);
+  }
+
+  .locked-content {
+    background: linear-gradient(135deg, #fff8e6 0%, #fff3e0 100%);
+    border-left: 4px solid var(--accent);
+    padding: 20px;
+    margin: 20px -25px;
+    position: relative;
+  }
+
+  .locked-icon {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--accent);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .locked-title {
+    color: var(--accent-dark);
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .unlock-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, var(--accent), #ffb74d);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .unlock-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+  }
+
+  .unlock-btn:active {
+    transform: translateY(0);
+  }
+
+  .ad-box {
+    margin: 40px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    text-align: center;
+    border-radius: 16px;
+    font-size: 16px;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+
+  .ad-box#nativeAdIdeas {
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ad-label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(21, 101, 192, 0.1);
+    color: #1565c0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    animation: modalFadeIn 0.3s;
+  }
+
+  @keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .modal h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 22px;
+  }
+
+  .modal-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+  }
+
+  .modal-btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .modal-btn-primary {
+    background: linear-gradient(to right, var(--accent), #ffb74d);
+    color: white;
+  }
+
+  .modal-btn-secondary {
+    background: #f0f0f0;
+    color: var(--dark);
+  }
+
+  footer {
+    background: white;
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--gray);
+    font-size: 14px;
+    margin-top: 50px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .business-plan {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    margin-top: 40px;
+    box-shadow: var(--shadow);
+  }
+
+  .plan-title {
+    color: var(--primary);
+    font-size: 22px;
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+
+  .plan-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .plan-step {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+  }
+
+  .step-number {
+    background: var(--primary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .step-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+  }
+
+  @media (max-width: 768px) {
+    .idea-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .filter-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    h1 {
+      font-size: 24px;
+    }
+    
+    .location-filter {
+      gap: 10px;
+    }
+    
+    .location-btn {
+      padding: 8px 15px;
+      font-size: 14px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <h1><i class="fas fa-lightbulb"></i> Business Ideas for Nyota Fund</h1>
+    <p class="tagline">Discover profitable business ideas suitable for different locations in Kenya. Filter by your area and target market.</p>
+    
+    <div class="location-filter">
+      <button class="location-btn active" onclick="filterIdeas('all')">All Locations</button>
+      <button class="location-btn" onclick="filterIdeas('urban')">Urban Areas</button>
+      <button class="location-btn" onclick="filterIdeas('rural')">Rural Areas</button>
+      <button class="location-btn" onclick="filterIdeas('periurban')">Peri-Urban</button>
+      <button class="location-btn" onclick="filterIdeas('coastal')">Coastal Regions</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  
+  <div class="filter-section">
+    <h3 style="color: var(--primary); margin-bottom: 20px;">
+      <i class="fas fa-filter"></i> Filter Business Ideas
+    </h3>
+    
+    <div class="filter-grid">
+      <div class="filter-group">
+        <label class="filter-label">Investment Range (KES)</label>
+        <select id="investmentRange">
+          <option value="all">All Ranges</option>
+          <option value="50000-200000">50,000 - 200,000</option>
+          <option value="200000-500000">200,000 - 500,000</option>
+          <option value="500000-1000000">500,000 - 1,000,000</option>
+          <option value="1000000+">1,000,000+</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label class="filter-label">Business Type</label>
+        <select id="businessType">
+          <option value="all">All Types</option>
+          <option value="agriculture">Agriculture</option>
+          <option value="retail">Retail</option>
+          <option value="service">Services</option>
+          <option value="manufacturing">Manufacturing</option>
+          <option value="food">Food & Beverage</option>
+          <option value="technology">Technology</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label class="filter-label">Target Customers</label>
+        <select id="targetCustomers">
+          <option value="all">All Customers</option>
+          <option value="local">Local Community</option>
+          <option value="tourists">Tourists</option>
+          <option value="businesses">Businesses</option>
+          <option value="youth">Youth Market</option>
+          <option value="families">Families</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label class="filter-label">Time to Profitability</label>
+        <select id="profitabilityTime">
+          <option value="all">Any Time</option>
+          <option value="short">3-6 Months</option>
+          <option value="medium">6-12 Months</option>
+          <option value="long">1-2 Years</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Native Ad -->
+  <div class="ad-box" id="nativeAdIdeas">
+    <div class="ad-label">ADVERTISEMENT</div>
+    Advertisement
+  </div>
+
+  <div class="idea-grid" id="ideaContainer">
+    <!-- Business Ideas will be loaded here -->
+  </div>
+
+  <div class="business-plan">
+    <h3 class="plan-title"><i class="fas fa-clipboard-list"></i> How to Develop Your Business Plan</h3>
+    
+    <div class="plan-steps">
+      <div class="plan-step">
+        <div class="step-number">1</div>
+        <div class="step-title">Market Research</div>
+        <p>Identify your target customers, competitors, and market demand in your chosen location.</p>
+      </div>
+      
+      <div class="plan-step">
+        <div class="step-number">2</div>
+        <div class="step-title">Capital Planning</div>
+        <p>Use our calculator to determine funding needs for equipment, inventory, and operating costs.</p>
+      </div>
+      
+      <div class="plan-step">
+        <div class="step-number">3</div>
+        <div class="step-title">Legal Requirements</div>
+        <p>Register your business, obtain necessary licenses, and understand tax obligations.</p>
+      </div>
+      
+      <div class="plan-step">
+        <div class="step-number">4</div>
+        <div class="step-title">Nyota Fund Application</div>
+        <p>Prepare all required documents and apply through official channels with our guidance.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for unlocking premium content -->
+  <div id="unlockModal" class="modal">
+    <div class="modal-content">
+      <h3><i class="fas fa-gem"></i> Unlock Detailed Business Analysis</h3>
+      <p>Watch a short advertisement to unlock:</p>
+      <ul style="text-align: left; margin: 20px; line-height: 1.8;">
+        <li><strong>Detailed Financial Projections</strong> - Revenue, expenses, profit margins</li>
+        <li><strong>Competitor Analysis</strong> - Local competition and market positioning</li>
+        <li><strong>Marketing Strategy</strong> - How to attract and retain customers</li>
+        <li><strong>Risk Assessment</strong> - Potential challenges and solutions</li>
+        <li><strong>Supplier Contacts</strong> - Recommended suppliers in your area</li>
+      </ul>
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-secondary" onclick="closeModal()">Maybe Later</button>
+        <button class="modal-btn modal-btn-primary" onclick="unlockPremiumContent()">Watch Ad & Unlock</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><i class="fas fa-exclamation-circle"></i> These business ideas are suggestions based on market research. Success depends on proper planning, execution, and market conditions.</p>
+  <p>© 2024 Nyota Fund Guide | Not affiliated with Government of Kenya</p>
+</footer>
+
+<script>
+  // Business ideas data
+  const businessIdeas = [
+    {
+      id: 1,
+      title: "Urban Fresh Produce Delivery",
+      location: "urban",
+      investment: "50000-200000",
+      type: "food",
+      customers: "local",
+      profitability: "short",
+      icon: "fas fa-truck",
+      suitableLocation: "Nairobi, Mombasa, Kisumu city centers",
+      targetCustomers: "Working professionals, busy families, offices",
+      operatingHours: "6 AM - 9 PM (Peak: 5-8 PM)",
+      keyRequirements: "Refrigeration, delivery vehicles, supplier network",
+      premiumContent: {
+        financials: "Monthly revenue: KES 150,000-300,000 | Margin: 35-45%",
+        competition: "3-5 major competitors in urban areas",
+        marketing: "Social media ads, partnerships with offices, referral program",
+        risks: "Perishable goods spoilage, traffic delays, customer retention",
+        suppliers: "Nairobi's Wakulima Market, local farms in Kiambu"
+      }
+    },
+    {
+      id: 2,
+      title: "Agro-processing Center",
+      location: "rural",
+      investment: "500000-1000000",
+      type: "agriculture",
+      customers: "businesses",
+      profitability: "medium",
+      icon: "fas fa-industry",
+      suitableLocation: "Agricultural regions like Trans-Nzoia, Meru, Kisii",
+      targetCustomers: "Farmers, food manufacturers, export companies",
+      operatingHours: "8 AM - 6 PM (Seasonal variations)",
+      keyRequirements: "Processing equipment, storage facilities, quality certification",
+      premiumContent: {
+        financials: "Monthly revenue: KES 500,000-1,200,000 | Margin: 25-35%",
+        competition: "Limited competition in rural processing",
+        marketing: "Direct farmer partnerships, export agency contracts",
+        risks: "Seasonal supply variations, equipment maintenance",
+        suppliers: "Local farmer cooperatives, equipment from China/India"
+      }
+    },
+    {
+      id: 3,
+      title: "Beachfront Café & Snack Bar",
+      location: "coastal",
+      investment: "200000-500000",
+      type: "food",
+      customers: "tourists",
+      profitability: "short",
+      icon: "fas fa-umbrella-beach",
+      suitableLocation: "Diani, Malindi, Watamu beach areas",
+      targetCustomers: "Tourists, local beachgoers, hotel guests",
+      operatingHours: "7 AM - 10 PM (Peak: 11 AM - 4 PM)",
+      keyRequirements: "Beachfront location, tourism license, quality food handlers",
+      premiumContent: {
+        financials: "High season: KES 300,000-600,000/month | Margin: 40-50%",
+        competition: "Moderate competition but tourist volume high",
+        marketing: "Hotel partnerships, tourist guide listings, Instagram",
+        risks: "Seasonal tourism, weather dependence, perishable stock",
+        suppliers: "Local fishermen, Mombasa wholesale markets"
+      }
+    },
+    {
+      id: 4,
+      title: "Digital Services Hub",
+      location: "periurban",
+      investment: "50000-200000",
+      type: "technology",
+      customers: "youth",
+      profitability: "medium",
+      icon: "fas fa-laptop-code",
+      suitableLocation: "Thika, Eldoret, Nakuru town outskirts",
+      targetCustomers: "Students, freelancers, small businesses",
+      operatingHours: "8 AM - 8 PM (Extended for students)",
+      keyRequirements: "Computers, internet, basic software, training space",
+      premiumContent: {
+        financials: "Monthly revenue: KES 100,000-250,000 | Margin: 50-60%",
+        competition: "Growing demand, limited quality providers",
+        marketing: "University partnerships, social media, community training",
+        risks: "Technology obsolescence, internet reliability",
+        suppliers: "Nairobi's computer city, local internet providers"
+      }
+    },
+    {
+      id: 5,
+      title: "Poultry Farming with Value Addition",
+      location: "rural",
+      investment: "200000-500000",
+      type: "agriculture",
+      customers: "local",
+      profitability: "medium",
+      icon: "fas fa-egg",
+      suitableLocation: "Central Kenya, Rift Valley regions",
+      targetCustomers: "Local markets, hotels, supermarkets",
+      operatingHours: "Farm operations: 6 AM - 6 PM",
+      keyRequirements: "Poultry house, chicks, feed, vaccination equipment",
+      premiumContent: {
+        financials: "Monthly revenue: KES 200,000-400,000 | Margin: 30-40%",
+        competition: "Many small-scale farmers, few with processing",
+        marketing: "Direct to hotels, branded egg cartons, local markets",
+        risks: "Disease outbreaks, feed price fluctuations",
+        suppliers: "Kenbro chicks, Unga Feeds, local veterinarians"
+      }
+    },
+    {
+      id: 6,
+      title: "Fashion & Tailoring Workshop",
+      location: "urban",
+      investment: "100000-300000",
+      type: "retail",
+      customers: "local",
+      profitability: "short",
+      icon: "fas fa-tshirt",
+      suitableLocation: "Urban residential areas, near markets",
+      targetCustomers: "Working women, students, uniform needs",
+      operatingHours: "8 AM - 7 PM (Extended for appointments)",
+      keyRequirements: "Sewing machines, skilled tailors, fabric inventory",
+      premiumContent: {
+        financials: "Monthly revenue: KES 150,000-350,000 | Margin: 40-55%",
+        competition: "Many tailors but quality varies widely",
+        marketing: "Instagram showcase, school uniform contracts, referrals",
+        risks: "Fashion trends, fabric availability, skilled labor",
+        suppliers: "Gikomba market, imported fabrics from Dubai"
+      }
+    },
+    {
+      id: 7,
+      title: "Eco-Tourism Camp Site",
+      location: "rural",
+      investment: "500000-1000000",
+      type: "service",
+      customers: "tourists",
+      profitability: "long",
+      icon: "fas fa-campground",
+      suitableLocation: "Wildlife conservancies, scenic rural areas",
+      targetCustomers: "Adventure tourists, domestic travelers, schools",
+      operatingHours: "24/7 operations with seasonal staff",
+      keyRequirements: "Land lease, camping facilities, safety equipment",
+      premiumContent: {
+        financials: "Peak season: KES 400,000-800,000/month | Margin: 35-45%",
+        competition: "Unique offering in specific locations",
+        marketing: "Travel agency partnerships, online booking platforms",
+        risks: "Seasonal tourism, security concerns, environmental regulations",
+        suppliers: "Local craftsmen for structures, KWS for permits"
+      }
+    },
+    {
+      id: 8,
+      title: "Mobile Phone Repair & Accessories",
+      location: "periurban",
+      investment: "100000-250000",
+      type: "technology",
+      customers: "youth",
+      profitability: "short",
+      icon: "fas fa-mobile-alt",
+      suitableLocation: "Growing towns, near colleges and markets",
+      targetCustomers: "Students, young professionals, general public",
+      operatingHours: "9 AM - 8 PM (Busy weekends)",
+      keyRequirements: "Technical skills, spare parts inventory, testing equipment",
+      premiumContent: {
+        financials: "Monthly revenue: KES 120,000-280,000 | Margin: 45-60%",
+        competition: "Many repair shops but quality inconsistent",
+        marketing: "Social media repairs showcase, school partnerships",
+        risks: "Rapid technology changes, counterfeit parts",
+        suppliers: "Nairobi's Luthuli Avenue, direct China imports"
+      }
+    }
+  ];
+
+  // State management
+  let currentFilter = 'all';
+  let unlockedIdeas = JSON.parse(localStorage.getItem('unlockedIdeas') || '[]');
+  let userHasWatchedAd = localStorage.getItem('nyotaAdWatched') === 'true';
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    renderIdeas();
+    setupFilters();
+  });
+
+  // Filter ideas by location
+  function filterIdeas(location) {
+    currentFilter = location;
+    
+    // Update active button
+    document.querySelectorAll('.location-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    renderIdeas();
+  }
+
+  // Setup filter event listeners
+  function setupFilters() {
+    const filters = ['investmentRange', 'businessType', 'targetCustomers', 'profitabilityTime'];
+    
+    filters.forEach(filterId => {
+      document.getElementById(filterId).addEventListener('change', renderIdeas);
+    });
+  }
+
+  // Render ideas based on filters
+  function renderIdeas() {
+    const container = document.getElementById('ideaContainer');
+    const investmentFilter = document.getElementById('investmentRange').value;
+    const typeFilter = document.getElementById('businessType').value;
+    const customerFilter = document.getElementById('targetCustomers').value;
+    const profitFilter = document.getElementById('profitabilityTime').value;
+    
+    // Filter ideas
+    const filteredIdeas = businessIdeas.filter(idea => {
+      // Location filter
+      if (currentFilter !== 'all' && idea.location !== currentFilter) return false;
+      
+      // Investment filter
+      if (investmentFilter !== 'all' && idea.investment !== investmentFilter) return false;
+      
+      // Type filter
+      if (typeFilter !== 'all' && idea.type !== typeFilter) return false;
+      
+      // Customer filter
+      if (customerFilter !== 'all' && idea.customers !== customerFilter) return false;
+      
+      // Profitability filter
+      if (profitFilter !== 'all' && idea.profitability !== profitFilter) return false;
+      
+      return true;
+    });
+    
+    // Render ideas
+    if (filteredIdeas.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: white; border-radius: 18px;">
+          <i class="fas fa-search" style="font-size: 48px; color: var(--primary); margin-bottom: 20px;"></i>
+          <h3 style="color: var(--primary); margin-bottom: 10px;">No Business Ideas Found</h3>
+          <p>Try adjusting your filters to see more business ideas.</p>
+        </div>
+      `;
+      return;
+    }
+    
+    container.innerHTML = filteredIdeas.map(idea => `
+      <div class="idea-card" data-id="${idea.id}">
+        <div class="idea-header">
+          <div class="idea-icon">
+            <i class="${idea.icon}"></i>
+          </div>
+          <div class="idea-title">${idea.title}</div>
+          <div class="idea-location">
+            <i class="fas fa-map-marker-alt"></i> ${getLocationLabel(idea.location)}
+          </div>
+        </div>
+        
+        <div class="idea-content">
+          <div class="idea-detail">
+            <div class="detail-icon"><i class="fas fa-money-bill-wave"></i></div>
+            <div>
+              <div class="detail-label">Investment Required</div>
+              <div class="detail-value">KES ${idea.investment.replace('-', ' - ').replace('+', '+')}</div>
+            </div>
+          </div>
+          
+          <div class="idea-detail">
+            <div class="detail-icon"><i class="fas fa-map-marked-alt"></i></div>
+            <div>
+              <div class="detail-label">Suitable Locations</div>
+              <div class="detail-value">${idea.suitableLocation}</div>
+            </div>
+          </div>
+          
+          <div class="idea-detail">
+            <div class="detail-icon"><i class="fas fa-users"></i></div>
+            <div>
+              <div class="detail-label">Target Customers</div>
+              <div class="detail-value">${idea.targetCustomers}</div>
+            </div>
+          </div>
+          
+          <div class="idea-detail">
+            <div class="detail-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <div class="detail-label">Operating Hours</div>
+              <div class="detail-value">${idea.operatingHours}</div>
+            </div>
+          </div>
+          
+          <div class="idea-detail">
+            <div class="detail-icon"><i class="fas fa-tools"></i></div>
+            <div>
+              <div class="detail-label">Key Requirements</div>
+              <div class="detail-value">${idea.keyRequirements}</div>
+            </div>
+          </div>
+          
+          ${unlockedIdeas.includes(idea.id) || userHasWatchedAd ? `
+            <div class="locked-content" style="background: #e6f4ec; border-color: var(--primary);">
+              <div class="locked-title" style="color: var(--primary);">
+                <i class="fas fa-unlock"></i> Premium Analysis Unlocked
+              </div>
+              <div class="idea-detail">
+                <div class="detail-icon"><i class="fas fa-chart-line"></i></div>
+                <div>
+                  <div class="detail-label">Financial Projections</div>
+                  <div class="detail-value">${idea.premiumContent.financials}</div>
+                </div>
+              </div>
+              <div class="idea-detail">
+                <div class="detail-icon"><i class="fas fa-balance-scale"></i></div>
+                <div>
+                  <div class="detail-label">Competition Analysis</div>
+                  <div class="detail-value">${idea.premiumContent.competition}</div>
+                </div>
+              </div>
+              <div class="idea-detail">
+                <div class="detail-icon"><i class="fas fa-bullhorn"></i></div>
+                <div>
+                  <div class="detail-label">Marketing Strategy</div>
+                  <div class="detail-value">${idea.premiumContent.marketing}</div>
+                </div>
+              </div>
+              <div class="idea-detail">
+                <div class="detail-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div>
+                  <div class="detail-label">Key Risks</div>
+                  <div class="detail-value">${idea.premiumContent.risks}</div>
+                </div>
+              </div>
+              <div class="idea-detail">
+                <div class="detail-icon"><i class="fas fa-truck"></i></div>
+                <div>
+                  <div class="detail-label">Supplier Recommendations</div>
+                  <div class="detail-value">${idea.premiumContent.suppliers}</div>
+                </div>
+              </div>
+            </div>
+          ` : `
+            <div class="locked-content">
+              <div class="locked-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class="locked-title">
+                <i class="fas fa-gem"></i> Premium Analysis Locked
+              </div>
+              <p>Unlock detailed financial projections, competitor analysis, marketing strategy, risk assessment, and supplier contacts for this business idea.</p>
+              <button class="unlock-btn" onclick="showUnlockModal(${idea.id})">
+                <i class="fas fa-gem"></i> Watch Ad to Unlock
+              </button>
+            </div>
+          `}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Get location label
+  function getLocationLabel(location) {
+    const labels = {
+      'urban': 'Urban Areas',
+      'rural': 'Rural Areas',
+      'periurban': 'Peri-Urban',
+      'coastal': 'Coastal Regions'
+    };
+    return labels[location] || location;
+  }
+
+  // Show unlock modal
+  function showUnlockModal(ideaId) {
+    localStorage.setItem('currentIdeaToUnlock', ideaId);
+    document.getElementById('unlockModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('unlockModal').style.display = 'none';
+  }
+
+  // Unlock premium content
+  function unlockPremiumContent() {
+    closeModal();
+    const ideaId = parseInt(localStorage.getItem('currentIdeaToUnlock'));
+    
+    // Simulate ad view (replace with actual median integration)
+    if (typeof median !== "undefined" && median.showRewarded) {
+      median.showRewarded(function(success){
+        if(success){
+          unlockIdeaContent(ideaId);
+        } else {
+          alert("Please watch the ad to unlock premium content.");
+        }
+      });
+    } else {
+      // Fallback for demo
+      unlockIdeaContent(ideaId);
+    }
+  }
+
+  function unlockIdeaContent(ideaId) {
+    if (!unlockedIdeas.includes(ideaId)) {
+      unlockedIdeas.push(ideaId);
+      localStorage.setItem('unlockedIdeas', JSON.stringify(unlockedIdeas));
+      userHasWatchedAd = true;
+      localStorage.setItem('nyotaAdWatched', 'true');
+      
+      // Show success message
+      const idea = businessIdeas.find(i => i.id === ideaId);
+      alert(`Premium analysis unlocked for "${idea.title}"!`);
+      
+      // Re-render ideas
+      renderIdeas();
+    }
+  }
+</script>
+
+</body>
+</html>
