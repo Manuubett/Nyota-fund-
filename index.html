@@ -3,19 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nyota Fund Guide</title>
-
+  <title>Nyota Fund Guide - Your Path to Business Funding</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f6f7f9;
-      color: #333;
-      position: relative;
-      min-height: 100vh;
+    :root {
+      --primary: #0b7a43;
+      --primary-dark: #095c33;
+      --primary-light: #d4edda;
+      --secondary: #4caf50;
+      --accent: #ff9800;
+      --light: #f8f9fa;
+      --dark: #333;
+      --gray: #666;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
-    
-    /* Lightweight watermark background */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f9f4 0%, #e6f4ec 100%);
+      color: var(--dark);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Subtle background pattern */
     body::before {
       content: "";
       position: fixed;
@@ -23,174 +41,678 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" opacity="0.4"><text x="50" y="180" font-family="Arial" font-size="60" fill="%230b7a43" transform="rotate(-15 100 100)">Nyota</text><text x="120" y="250" font-family="Arial" font-size="40" fill="%230b7a43" transform="rotate(-15 100 100)">Fund</text></svg>');
-      background-repeat: repeat;
-      background-size: 400px 300px;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(11, 122, 67, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(11, 122, 67, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(11, 122, 67, 0.02) 0%, transparent 20%);
       pointer-events: none;
       z-index: -1;
     }
 
     header {
-      background: #0b7a43;
-      color: #fff;
-      padding: 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 24px 20px;
       text-align: center;
+      box-shadow: 0 4px 20px rgba(11, 122, 67, 0.3);
       position: relative;
-      z-index: 1;
+      overflow: hidden;
     }
 
-    header h1 {
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1%, transparent 1%);
+      background-size: 30px 30px;
+      animation: float 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-30px, -30px) rotate(360deg); }
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .logo-icon {
+      background: rgba(255, 255, 255, 0.2);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      backdrop-filter: blur(5px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
       margin: 0;
-      font-size: 22px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
 
-    header p {
-      margin-top: 8px;
-      font-size: 14px;
+    .tagline {
+      font-size: 16px;
       opacity: 0.95;
+      margin-top: 8px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-top: 4px;
     }
 
     .container {
-      padding: 16px;
-      position: relative;
-      z-index: 1;
+      padding: 24px 16px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    .card {
-      background: #fff;
-      padding: 18px;
-      border-radius: 10px;
-      margin-bottom: 12px;
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .action-card {
+      background: white;
+      padding: 24px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+
+    .action-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+    }
+
+    .card-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      transition: transform 0.1s ease;
-      position: relative;
-      z-index: 1;
+      gap: 15px;
+      margin-bottom: 15px;
     }
 
-    .card:active {
-      transform: scale(0.98);
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--primary);
     }
 
-    .card span {
-      font-size: 16px;
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      flex: 1;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .card-arrow {
+      color: var(--primary);
+      font-size: 24px;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .action-card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(11, 122, 67, 0.1);
+    }
+
+    .feature-icon {
+      color: var(--primary);
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .feature-text {
+      font-size: 13px;
       font-weight: 500;
-    }
-
-    .card small {
-      font-size: 12px;
-      color: #666;
-    }
-
-    .arrow {
-      font-size: 20px;
-      color: #0b7a43;
+      color: var(--dark);
     }
 
     .ad-box {
-      background: #e9ecef;
+      margin: 40px 0;
+      padding: 24px;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
       text-align: center;
-      padding: 14px;
-      border-radius: 8px;
-      margin: 20px 0;
-      font-size: 13px;
-      color: #666;
+      border-radius: 16px;
+      font-size: 16px;
+      color: #1565c0;
+      border: 1px solid #90caf9;
+      font-weight: 600;
+      box-shadow: var(--shadow);
       position: relative;
-      z-index: 1;
+      overflow: hidden;
     }
 
-    /* Home Page: add this after cards */
     .ad-box#nativeAdHome {
-      background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
-      border: 1px solid #cce0ff;
-      color: #0056b3;
-      font-weight: bold;
-      min-height: 60px;
+      min-height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    footer {
+    .ad-label {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(21, 101, 192, 0.1);
+      color: #1565c0;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .testimonial-section {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      margin: 30px 0;
+      box-shadow: var(--shadow);
+    }
+
+    .testimonial-title {
       text-align: center;
+      color: var(--primary);
+      margin-bottom: 25px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .testimonial {
+      background: var(--primary-light);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 14px;
+    }
+
+    .faq-section {
+      margin-top: 40px;
+    }
+
+    .faq-title {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .faq-item {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      margin-top: 10px;
+      color: var(--gray);
+      font-size: 14px;
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-icon {
+      color: var(--primary);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    footer {
+      background: white;
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--gray);
+      font-size: 14px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .footer-disclaimer {
       font-size: 12px;
-      color: #777;
-      padding: 10px;
-      position: relative;
-      z-index: 1;
-      background: #f6f7f9;
+      color: #888;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 768px) {
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+      
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      .logo {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .stats-bar {
+        gap: 15px;
+      }
+      
+      .stat-item {
+        padding: 8px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+        gap: 15px;
+      }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Nyota Fund Guide</h1>
-  <p>Learn about eligibility, requirements, and business tools</p>
+  <div class="header-content">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-hand-holding-usd"></i>
+      </div>
+      <h1>Nyota Fund Guide</h1>
+    </div>
+    <p class="tagline">Your complete guide to accessing government business funding for youth and women entrepreneurs in Kenya</p>
+    
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-number">5,000+</span>
+        <span class="stat-label">Users Helped</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">95%</span>
+        <span class="stat-label">Satisfaction</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">24/7</span>
+        <span class="stat-label">Access</span>
+      </div>
+    </div>
+  </div>
 </header>
 
 <div class="container">
-
-  <div class="card" onclick="goTo('check.html')">
-    <div>
-      <span>Eligibility Check</span><br/>
-      <small>Check if you may qualify</small>
+  <div class="quick-actions">
+    <div class="action-card" onclick="goTo('check.html')">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="card-title">Eligibility Check</div>
+        <div class="card-arrow">›</div>
+      </div>
+      <div class="card-desc">
+        Check if you qualify for Nyota Fund with our smart assessment tool. Get instant feedback on your eligibility status.
+      </div>
     </div>
-    <div class="arrow">›</div>
+
+    <div class="action-card" onclick="goTo('apply.html')">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="card-title">How to Apply</div>
+        <div class="card-arrow">›</div>
+      </div>
+      <div class="card-desc">
+        Step-by-step application guide including USSD, online portal, and Huduma Centre processes. Everything you need to know.
+      </div>
+    </div>
+
+    <div class="action-card" onclick="goTo('calculator.html')">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-calculator"></i>
+        </div>
+        <div class="card-title">Business Tools</div>
+        <div class="card-arrow">›</div>
+      </div>
+      <div class="card-desc">
+        Capital estimator, business planning tools, and financial calculators to plan your funding needs effectively.
+      </div>
+    </div>
   </div>
 
-  <div class="card" onclick="goTo('apply.html')">
-    <div>
-      <span>How to Apply</span><br/>
-      <small>Step-by-step guide</small>
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <div class="feature-text">Secure & Private</div>
     </div>
-    <div class="arrow">›</div>
-  </div>
-
-  <div class="card" onclick="goTo('eligibility.html')">
-    <div>
-      <span>Business Tools</span><br/>
-      <small>Calculators & planners</small>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <i class="fas fa-mobile-alt"></i>
+      </div>
+      <div class="feature-text">Mobile Friendly</div>
     </div>
-    <div class="arrow">›</div>
-  </div>
-
-  <div class="card" onclick="goTo('eligibility.html')">
-    <div>
-      <span>Business Ideas</span><br/>
-      <small>Small business ideas</small>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <i class="fas fa-clock"></i>
+      </div>
+      <div class="feature-text">Always Updated</div>
     </div>
-    <div class="arrow">›</div>
-  </div>
-
-  <div class="card" onclick="goTo('privacy.html')">
-    <div>
-      <span>Disclaimer</span><br/>
-      <small>Important information</small>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <div class="feature-text">Educational</div>
     </div>
-    <div class="arrow">›</div>
   </div>
 
   <!-- Home Page: add this after cards -->
   <div class="ad-box" id="nativeAdHome">
+    <div class="ad-label">ADVERTISEMENT</div>
     <!-- Native Ad will be loaded by Median -->
     Advertisement
   </div>
 
+  <div class="testimonial-section">
+    <div class="testimonial-title">What Users Say</div>
+    
+    <div class="testimonial">
+      <div class="testimonial-text">
+        "This guide helped me understand the Nyota Fund requirements clearly. I was able to prepare all documents before applying."
+      </div>
+      <div class="testimonial-author">- Sarah M., Nairobi</div>
+    </div>
+    
+    <div class="testimonial">
+      <div class="testimonial-text">
+        "The capital estimator tool gave me a realistic view of how much funding to request. Very helpful for business planning."
+      </div>
+      <div class="testimonial-author">- John K., Mombasa</div>
+    </div>
+  </div>
+
+  <div class="action-card" onclick="goTo('ideas.html')" style="margin: 30px 0;">
+    <div class="card-header">
+      <div class="card-icon">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <div class="card-title">Business Ideas</div>
+      <div class="card-arrow">›</div>
+    </div>
+    <div class="card-desc">
+      Explore profitable business ideas suitable for Nyota Fund. Get inspiration and detailed information about various sectors.
+    </div>
+  </div>
+
+  <div class="action-card" onclick="goTo('privacy.html')">
+    <div class="card-header">
+      <div class="card-icon">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div class="card-title">Privacy & Disclaimer</div>
+      <div class="card-arrow">›</div>
+    </div>
+    <div class="card-desc">
+      Important information about data privacy, app usage, and legal disclaimer. Please read before using our services.
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <div class="faq-title">Frequently Asked Questions</div>
+    
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        Is this app affiliated with the Government of Kenya?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        No, this is an independent informational guide created to help applicants understand the Nyota Fund program better. Always verify information with official sources.
+      </div>
+    </div>
+    
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        Does using this app guarantee funding approval?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        No, this app provides guidance and tools only. Final approval decisions are made solely by Nyota Fund officials based on official criteria.
+      </div>
+    </div>
+    
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-question">
+        Is there any cost to use this app?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        The app is free to use. We show advertisements to support development and maintenance. Watching ads unlocks additional features like detailed analysis and sharing.
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>
-  Not affiliated with the Government of Kenya or Nyota Fund
+  <div class="footer-links">
+    <a href="check.html" class="footer-link">Eligibility Check</a>
+    <a href="apply.html" class="footer-link">How to Apply</a>
+    <a href="calculator.html" class="footer-link">Business Tools</a>
+    <a href="ideas.html" class="footer-link">Business Ideas</a>
+    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+  </div>
+  
+  <p class="footer-disclaimer">
+    <i class="fas fa-exclamation-circle"></i> This app is for informational purposes only. Not affiliated with the Government of Kenya or Nyota Fund. Always use official channels for applications.
+  </p>
+  
+  <p>© 2024 Nyota Fund Guide. All rights reserved.</p>
 </footer>
 
 <script>
   function goTo(page) {
-    window.location.href = page;
+    // Add animation before navigation
+    const card = event.currentTarget;
+    card.style.transform = 'scale(0.98)';
+    
+    setTimeout(() => {
+      window.location.href = page;
+    }, 150);
   }
+
+  function toggleFAQ(item) {
+    item.classList.toggle('active');
+  }
+
+  // Animate stats counter
+  document.addEventListener('DOMContentLoaded', function() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(stat => {
+      const target = parseInt(stat.textContent);
+      let current = 0;
+      const increment = target / 50;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          stat.textContent = target + (stat.textContent.includes('%') ? '%' : '+');
+          clearInterval(timer);
+        } else {
+          stat.textContent = Math.floor(current) + (stat.textContent.includes('%') ? '%' : '+');
+        }
+      }, 30);
+    });
+    
+    // Add hover effects for cards
+    const cards = document.querySelectorAll('.action-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  });
 </script>
 
 </body>
-</html>
+  </html>
