@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Apply – Nyota Fund Guide</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #f6f7f9 0%, #eef2f7 100%);
+    color: #333;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0b7a43 0%, #095c33 100%);
+    color: #fff;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(11, 122, 67, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .header-subtitle {
+    margin-top: 5px;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  .container {
+    padding: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 18px;
+    color: #0b7a43;
+    margin: 20px 0 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #0b7a43;
+    font-weight: 600;
+  }
+
+  .step {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border-left: 5px solid #0b7a43;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .step:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  .step-number {
+    display: inline-block;
+    background: #0b7a43;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+
+  .step h3 {
+    margin: 0 0 10px;
+    font-size: 17px;
+    color: #0b7a43;
+    display: flex;
+    align-items: center;
+  }
+
+  .step p {
+    margin: 0 0 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #444;
+  }
+
+  .step ul {
+    margin: 10px 0 0 0;
+    padding-left: 20px;
+  }
+
+  .step li {
+    margin-bottom: 6px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .ussd-box {
+    background: #e6f4ec;
+    border: 1px solid #a3d9b5;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 12px 0;
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #0b7a43;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .ussd-icon {
+    font-size: 24px;
+  }
+
+  .documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+  .document-item {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    border-left: 3px solid #0b7a43;
+  }
+
+  .cost-breakdown {
+    background: #fff8e6;
+    border: 1px solid #ffd54f;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 12px 0;
+  }
+
+  .cost-breakdown h4 {
+    margin: 0 0 10px 0;
+    color: #e65100;
+  }
+
+  .cost-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  .cost-amount {
+    font-weight: bold;
+  }
+
+  .contact-box {
+    background: #e3f2fd;
+    border: 1px solid #90caf9;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 12px 0;
+  }
+
+  .contact-item {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .contact-label {
+    font-weight: bold;
+    color: #1565c0;
+  }
+
+  .note {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+    background: #fff;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid #4caf50;
+  }
+
+  .warning {
+    margin-top: 16px;
+    background: #fdecea;
+    color: #b00020;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    border-left: 4px solid #d32f2f;
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.1);
+  }
+
+  .warning-icon {
+    font-size: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .timeline {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .timeline-item {
+    display: flex;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .timeline-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .timeline-dot {
+    width: 20px;
+    height: 20px;
+    background: #0b7a43;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .timeline-content {
+    flex-grow: 1;
+  }
+
+  .timeline-content strong {
+    color: #0b7a43;
+  }
+
+  .ad-box {
+    margin: 25px 0;
+    padding: 16px;
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    text-align: center;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #495057;
+    border: 1px solid #ced4da;
+    font-weight: 500;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  }
+
+  .ad-box#nativeAdApply {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 1px solid #90caf9;
+    color: #1565c0;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #0b7a43;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    transition: background 0.3s;
+  }
+
+  .back-button:hover {
+    background: #095c33;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+    padding: 15px;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 12px;
+    }
+    
+    .step {
+      padding: 15px;
+    }
+    
+    .documents-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h2>How to Apply for Nyota Fund</h2>
+  <div class="header-subtitle">Complete Step-by-Step Guide & USSD Process</div>
+</header>
+
+<div class="container">
+
+  <div class="section-title">📋 Pre-Application Requirements</div>
+
+  <div class="step">
+    <h3><span class="step-number">1</span> Confirm Your Eligibility</h3>
+    <p>Before applying, ensure you meet ALL basic requirements:</p>
+    <ul>
+      <li>Kenyan citizen aged 18-35 (Youth) OR any woman above 18 years</li>
+      <li>Valid National ID & KRA PIN certificate</li>
+      <li>Registered business or viable business idea with plan</li>
+      <li>Business operates within Kenya</li>
+      <li>Two guarantors with valid Kenyan IDs</li>
+      <li>Active bank account in your name</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-number">2</span> Prepare Required Documents</h3>
+    <p>Have these documents ready before starting application:</p>
+    <div class="documents-grid">
+      <div class="document-item">Original National ID</div>
+      <div class="document-item">KRA PIN Certificate</div>
+      <div class="document-item">Business Registration Certificate</div>
+      <div class="document-item">Business Plan (2-5 pages)</div>
+      <div class="document-item">Recent Passport Photo</div>
+      <div class="document-item">Bank Account Details</div>
+      <div class="document-item">Guarantor IDs & Contacts</div>
+      <div class="document-item">Proof of Residence</div>
+    </div>
+  </div>
+
+  <!-- Native Ad between steps -->
+  <div class="ad-box" id="nativeAdApply">
+    Advertisement
+  </div>
+
+  <div class="section-title">📱 Application Methods</div>
+
+  <div class="step">
+    <h3><span class="step-number">3</span> Option A: USSD Application Process</h3>
+    <p>Apply via mobile phone using USSD code:</p>
+    
+    <div class="ussd-box">
+      <span class="ussd-icon">📞</span>
+      <span>*483*57#</span>
+    </div>
+    
+    <p><strong>USSD Step-by-Step:</strong></p>
+    <ol>
+      <li>Dial <strong>*483*57#</strong> from your Safaricom line</li>
+      <li>Select "Nyota Fund Application"</li>
+      <li>Enter your National ID number</li>
+      <li>Choose application type (Individual/Group)</li>
+      <li>Fill business details as prompted</li>
+      <li>Enter guarantor information</li>
+      <li>Confirm all details are correct</li>
+      <li>Receive application reference number via SMS</li>
+    </ol>
+    <p><strong>USSD Charges:</strong> KSh 1 per session (Safaricom rates apply)</p>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-number">4</span> Option B: Online Portal Application</h3>
+    <p>Apply through official government portal:</p>
+    <ol>
+      <li>Visit: <strong>funds.go.ke</strong> or <strong>nyotafund.go.ke</strong></li>
+      <li>Click "Apply Now" or "Nyota Fund Application"</li>
+      <li>Create account with your ID number & phone</li>
+      <li>Complete all required sections online</li>
+      <li>Upload scanned documents (PDF/JPEG format)</li>
+      <li>Review and submit application</li>
+      <li>Download/print acknowledgement slip</li>
+    </ol>
+    <p><strong>Portal Benefits:</strong> Track application status online, receive email updates</p>
+  </div>
+
+  <div class="step">
+    <h3><span class="step-number">5</span> Option C: Huduma Centre Application</h3>
+    <p>Visit nearest Huduma Centre for assisted application:</p>
+    <ol>
+      <li>Locate nearest Huduma Centre</li>
+      <li>Carry original documents & photocopies</li>
+      <li>Request Nyota Fund application assistance</li>
+      <li>Officer will help complete form</li>
+      <li>Submit physical copies & get receipt</li>
+      <li>Application forwarded to ministry</li>
+    </ol>
+    <p><strong>Operating Hours:</strong> 8:00 AM - 5:00 PM (Weekdays)</p>
+  </div>
+
+  <div class="section-title">💰 Application Costs & Timeline</div>
+
+  <div class="cost-breakdown">
+    <h4>Estimated Application Costs (Total: FREE)</h4>
+    <div class="cost-item">
+      <span>Application Fee</span>
+      <span class="cost-amount">KSh 0</span>
+    </div>
+    <div class="cost-item">
+      <span>USSD Charges</span>
+      <span class="cost-amount">KSh 1-5</span>
+    </div>
+    <div class="cost-item">
+      <span>Document Photocopy</span>
+      <span class="cost-amount">KSh 20-50</span>
+    </div>
+    <div class="cost-item">
+      <span>Transport to Huduma</span>
+      <span class="cost-amount">Variable</span>
+    </div>
+    <div class="cost-item" style="border-top: 1px solid #ffd54f; padding-top: 8px; margin-top: 8px; font-weight: bold;">
+      <span>Total Official Fees</span>
+      <span class="cost-amount" style="color: #0b7a43;">KSh 0</span>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <strong>Submission:</strong> Immediate acknowledgement with reference number
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <strong>Verification:</strong> 1-2 weeks for document verification
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <strong>Evaluation:</strong> 2-4 weeks for business plan assessment
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <strong>Approval:</strong> 1-2 weeks for final decision
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <strong>Disbursement:</strong> 2-3 weeks after approval for funds transfer
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-box">
+    <h4>📞 Official Support Channels</h4>
+    <div class="contact-item">
+      <span class="contact-label">Helpline:</span> 020 221 0500
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">SMS:</span> 20023 (Safaricom)
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Email:</span> support@nyotafund.go.ke
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Twitter:</span> @NyotaFundKE
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Office:</span> Ministry of Youth Affairs, Teleposta Towers, Nairobi
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>📝 Important Notes:</strong><br>
+    1. This guide provides application information only<br>
+    2. Application does NOT guarantee funding approval<br>
+    3. Always use official government channels<br>
+    4. Keep your reference number safe for tracking<br>
+    5. Follow up after 30 days if no response
+  </div>
+
+  <div class="warning">
+    <span class="warning-icon">⚠️</span>
+    <strong>FRAUD ALERT:</strong> Nyota Fund applications are COMPLETELY FREE. 
+    Never pay anyone for application assistance. Report fraudsters to 
+    020 221 0500 or 999. Official agents have government ID badges.
+  </div>
+
+  <div style="text-align: center;">
+    <a href="index.html" class="back-button">← Back to Home</a>
+  </div>
+
+  <footer>
+    Not affiliated with Government of Kenya. This is an informational guide only.<br>
+    Last updated: March 2024 | Version 2.1
+  </footer>
+
+</div>
+
+<script>
+  // Smooth scroll to top on load
+  window.addEventListener('load', function() {
+    window.scrollTo(0, 0);
+  });
+
+  // Add click tracking for USSD code
+  document.querySelector('.ussd-box').addEventListener('click', function() {
+    alert('Dial *483*57# from your Safaricom line to start Nyota Fund application');
+  });
+
+  // Print functionality for documents list
+  window.printGuide = function() {
+    const printContent = document.querySelector('.container').innerHTML;
+    const originalContent = document.body.innerHTML;
+    
+    document.body.innerHTML = `
+      <div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+        <h1 style="color: #0b7a43;">Nyota Fund Application Guide</h1>
+        <div style="color: #666; margin-bottom: 20px;">Printed: ${new Date().toLocaleDateString()}</div>
+        ${printContent}
+      </div>
+    `;
+    
+    window.print();
+    document.body.innerHTML = originalContent;
+    window.location.reload();
+  };
+</script>
+
+</body>
+</html>
