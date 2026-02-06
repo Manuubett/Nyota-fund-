@@ -2,27 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>Nyota Fund Guide</title>
 
   <style>
+    :root {
+      --safe-top: env(safe-area-inset-top, 24px);
+    }
+
     body {
       margin: 0;
+      padding-top: var(--safe-top);
       font-family: Arial, sans-serif;
       background: #f6f7f9;
       color: #333;
-      position: relative;
       min-height: 100vh;
     }
-    
-    /* Lightweight watermark background */
+
+    /* Watermark background */
     body::before {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" opacity="0.03"><text x="50" y="180" font-family="Arial" font-size="60" fill="%230b7a43" transform="rotate(-15 100 100)">Nyota</text><text x="120" y="250" font-family="Arial" font-size="40" fill="%230b7a43" transform="rotate(-15 100 100)">Fund</text></svg>');
       background-repeat: repeat;
       background-size: 400px 300px;
@@ -35,8 +36,6 @@
       color: #fff;
       padding: 20px;
       text-align: center;
-      position: relative;
-      z-index: 1;
     }
 
     header h1 {
@@ -52,8 +51,6 @@
 
     .container {
       padding: 16px;
-      position: relative;
-      z-index: 1;
     }
 
     .card {
@@ -67,8 +64,6 @@
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
       transition: transform 0.1s ease;
-      position: relative;
-      z-index: 1;
     }
 
     .card:active {
@@ -90,20 +85,8 @@
       color: #0b7a43;
     }
 
+    /* Native Ad container (Median picks this up) */
     .ad-box {
-      background: #e9ecef;
-      text-align: center;
-      padding: 14px;
-      border-radius: 8px;
-      margin: 20px 0;
-      font-size: 13px;
-      color: #666;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Home Page: add this after cards */
-    .ad-box#nativeAdHome {
       background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
       border: 1px solid #cce0ff;
       color: #0056b3;
@@ -112,16 +95,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 13px;
     }
 
     footer {
       text-align: center;
       font-size: 12px;
       color: #777;
-      padding: 10px;
-      position: relative;
-      z-index: 1;
-      background: #f6f7f9;
+      padding: 12px;
     }
   </style>
 </head>
@@ -174,9 +157,8 @@
     <div class="arrow">›</div>
   </div>
 
-  <!-- Home Page: add this after cards -->
-  <div class="ad-box" id="nativeAdHome">
-    <!-- Native Ad will be loaded by Median -->
+  <!-- Native Ad (Adamo / AdMob Native Advanced) -->
+  <div class="ad-box median-native-ad">
     Advertisement
   </div>
 
@@ -193,4 +175,4 @@
 </script>
 
 </body>
-  </html>
+        </html>
