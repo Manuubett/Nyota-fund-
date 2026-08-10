@@ -1,84 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Term or Two?</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap');
 
-No file chosen
-Library
-Search
-
-New
-
-All
-
-Images
-
-Documents
-
-
-
-
-Name
-Modified
-Size
-
-Library
-/
-one-term-or-two-no-server.html
-More actions
-368
-369
-370
-371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
-384
-385
-386
-387
-388
-389
-390
-391
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401
-402
-403
-404
-405
-406
-407
-408
-409
-410
-411
-412
-413
-414
-415
-416
-417
-418
-419
-420
-421
-422
-423
+  :root{
+    --paper:#eef1f0;
+    --ink:#16221f;
+    --side-a:#1f6f78;
     --side-a-deep:#144a51;
+    --side-b:#b5502e;
+    --side-b-deep:#833a20;
+    --line:#c7cfcc;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .wrap{ width:100%; max-width:760px; }
+
+  .eyebrow{
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#5b6864; text-align:center; margin-bottom:10px; font-weight:600;
+  }
+
+  h1{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:900; font-size:clamp(38px, 7vw, 64px);
+    text-align:center; line-height:0.95; letter-spacing:-0.01em; margin-bottom:8px;
+  }
+
+  .sub{ text-align:center; color:#495650; font-size:15px; margin-bottom:24px; }
+
+  .country-row{
+    display:flex; justify-content:center; margin-bottom:28px;
+  }
+  .country-select{
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    min-width:240px;
+    cursor:pointer;
+  }
+  .country-select:focus{ outline:2px solid var(--side-a); outline-offset:1px; }
+
+  .rope-track{
+    position:relative; height:14px; background:var(--line);
+    border-radius:7px; overflow:hidden; margin-bottom:6px;
+  }
+  .rope-fill{
+    position:absolute; top:0; left:0; bottom:0;
+    background:linear-gradient(90deg, var(--side-a), var(--side-a-deep));
+    width:50%; transition:width 0.6s cubic-bezier(.4,0,.2,1);
+  }
+  .rope-marker{
+    position:absolute; top:-7px; width:28px; height:28px; border-radius:50%;
+    background:var(--ink); left:50%; transform:translateX(-50%);
+    transition:left 0.6s cubic-bezier(.4,0,.2,1);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 4px var(--paper);
+  }
+  .rope-marker::after{ content:''; width:8px; height:8px; border-radius:50%; background:var(--paper); }
+
+  .split-count{
+    display:flex; justify-content:space-between; font-size:13px;
+    color:#5b6864; margin-bottom:34px; font-weight:500;
+  }
+
+  .options{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+  .option{
+    position:relative; border:none; border-radius:14px; padding:28px 16px 22px;
+    cursor:pointer; text-align:center; font-family:'Inter', sans-serif;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+    background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.06);
+  }
+  .option:hover{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,0.08); }
+  .option:active{ transform:translateY(0px); }
+  .option:disabled{ cursor:not-allowed; opacity:0.6; }
+
+  .option.a{ border-top:5px solid var(--side-a); }
+  .option.b{ border-top:5px solid var(--side-b); }
+
+  .option .label{
+    font-family:'Big Shoulders Display', sans-serif; font-weight:700;
+    font-size:26px; margin-bottom:4px;
+  }
+  .option.a .label{ color:var(--side-a-deep); }
+  .option.b .label{ color:var(--side-b-deep); }
+
+  .option .pct{ font-size:34px; font-weight:700; font-family:'Big Shoulders Display', sans-serif; }
+  .option .votes{ font-size:12px; color:#7a8682; margin-top:2px; }
+
+  .option.voted-for{ box-shadow:0 0 0 2px var(--ink); }
+  .check{
+    position:absolute; top:10px; right:12px; font-size:11px;
+    letter-spacing:0.06em; text-transform:uppercase; color:#5b6864; font-weight:600;
+  }
+
+  .total-line{ text-align:center; margin-top:30px; font-size:13px; color:#5b6864; }
+  .total-line strong{ color:var(--ink); }
+
+  .footnote{ text-align:center; margin-top:6px; font-size:11px; color:#93a09b; }
+  .status{ text-align:center; margin-top:14px; font-size:12px; color:#93a09b; min-height:16px; }
+
+  .reset{
+    display:block; margin:22px auto 0; background:none; border:none;
+    font-size:12px; color:#93a09b; text-decoration:underline; cursor:pointer;
+  }
+
+  @media (max-width:480px){ .options{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="eyebrow">Live public poll</div>
+  <h1>One Term<br>or Two?</h1>
+  <p class="sub" id="subline">Cast your vote — every visitor gets one pull on the rope.</p>
+
+  <div class="country-row">
+    <select class="country-select" id="countrySelect">
+      <option value="">Select your county…</option>
+      <option value="Prefer not to say">Prefer not to say</option>
+    </select>
+  </div>
+
+  <div class="rope-track">
+    <div class="rope-fill" id="ropeFill"></div>
+    <div class="rope-marker" id="ropeMarker"></div>
+  </div>
+  <div class="split-count">
+    <span id="pctA">50%</span>
+    <span id="pctB">50%</span>
+  </div>
+
+  <div class="options">
+    <button class="option a" id="btnA" disabled>
+      <div class="check" id="checkA" style="visibility:hidden;">Your vote</div>
+      <div class="label">ONE TERM</div>
+      <div class="pct" id="bigPctA">–</div>
+      <div class="votes" id="votesA">– votes</div>
+    </button>
+    <button class="option b" id="btnB" disabled>
+      <div class="check" id="checkB" style="visibility:hidden;">Your vote</div>
+      <div class="label">TWO TERMS</div>
+      <div class="pct" id="bigPctB">–</div>
+      <div class="votes" id="votesB">– votes</div>
+    </button>
+  </div>
+
+  <div class="total-line"><strong id="totalVotes">0</strong> total votes so far</div>
+  <div class="footnote">Your county and choice are stored so results can be broken down by region. This version uses anonymous Firebase Auth and direct Firestore writes — no login or server required.</div>
+  <div class="status" id="status"></div>
+  <button class="reset" id="resetBtn" style="display:none;">clear my vote</button>
+</div>
+
+<script type="module">
+  // ─────────────────────────────────────────────────────────────
+  // FIREBASE CONFIG — paste your project's config object here.
+  // Firebase console → Project settings → General → Your apps → SDK setup
+  // ─────────────────────────────────────────────────────────────
+    const firebaseConfig = {
+    apiKey: "AIzaSyDeUJhRnpqvRq68NmMysW3VFPAjhKN-L2M",
+    authDomain: "political-analysis-dffae.firebaseapp.com",
+    projectId: "political-analysis-dffae",
+    storageBucket: "political-analysis-dffae.firebasestorage.app",
+    messagingSenderId: "451202956995",
+    appId: "1:451202956995:web:4d40c23c9d71ab4a0aac76",
+    measurementId: "G-7XNMD4TJG3"
+  };
+
+  // App Check → Firebase console → App Check → Apps → register a Web app
+  // with the reCAPTCHA v3 provider, then paste the site key here.
+  const RECAPTCHA_V3_SITE_KEY = "YOUR_RECAPTCHA_V3_SITE_KEY";
+  // ─────────────────────────────────────────────────────────────
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    initializeAppCheck, ReCaptchaV3Provider
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check.js";
+  import {
+    getAuth, signInAnonymously, onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, doc, getDoc, collection, onSnapshot, setDoc, deleteDoc, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const KENYA_COUNTIES = [
+    "Mombasa","Kwale","Kilifi","Tana River","Lamu","Taita-Taveta","Garissa","Wajir","Mandera",
+    "Marsabit","Isiolo","Meru","Tharaka-Nithi","Embu","Kitui","Machakos","Makueni","Nyandarua",
+    "Nyeri","Kirinyaga","Murang'a","Kiambu","Turkana","West Pokot","Samburu","Trans Nzoia",
+    "Uasin Gishu","Elgeyo-Marakwet","Nandi","Baringo","Laikipia","Nakuru","Narok","Kajiado",
+    "Kericho","Bomet","Kakamega","Vihiga","Bungoma","Busia","Siaya","Kisumu","Homa Bay","Migori",
+    "Kisii","Nyamira","Nairobi"
+  ];
+
+  const countySelect = document.getElementById('countrySelect');
+  KENYA_COUNTIES.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    countySelect.insertBefore(opt, countySelect.lastElementChild.nextSibling);
+  });
+  // move "Prefer not to say" to the end for tidiness
+  countySelect.appendChild(countySelect.querySelector('option[value="Prefer not to say"]'));
+
+  const el = {
+    ropeFill: document.getElementById('ropeFill'),
+    ropeMarker: document.getElementById('ropeMarker'),
+    pctA: document.getElementById('pctA'),
+    pctB: document.getElementById('pctB'),
+    bigPctA: document.getElementById('bigPctA'),
+    bigPctB: document.getElementById('bigPctB'),
+    votesA: document.getElementById('votesA'),
+    votesB: document.getElementById('votesB'),
+    totalVotes: document.getElementById('totalVotes'),
+    btnA: document.getElementById('btnA'),
+    btnB: document.getElementById('btnB'),
+    checkA: document.getElementById('checkA'),
+    checkB: document.getElementById('checkB'),
+    subline: document.getElementById('subline'),
+    resetBtn: document.getElementById('resetBtn'),
+    status: document.getElementById('status'),
+  };
+
+  let app, auth, db, uid = null;
+  const VOTES_COLLECTION = 'votes';
+  let myVote = null; // { choice, county } or null
+  let allVotes = []; // raw docs, updated via onSnapshot
+  let fingerprint = null;
+
+  function setStatus(msg){ el.status.textContent = msg; }
+
+  // Direct Firestore version: no Cloud Functions / Render server.
+  // Anonymous Firebase Auth identifies the current visitor.
+  async function saveVoteDirect(choice, county){
+    if(!uid) throw new Error('Anonymous authentication is not ready.');
+
+    const voteRef = doc(db, VOTES_COLLECTION, uid);
+    await setDoc(voteRef, {
+      choice,
+      county,
+      fingerprint: fingerprint || null,
+      updatedAt: serverTimestamp()
+    }, { merge: true });
+  }
+
+  async function deleteVoteDirect(){
+    if(!uid) throw new Error('Anonymous authentication is not ready.');
+    await deleteDoc(doc(db, VOTES_COLLECTION, uid));
+  }
+
+  // Lightweight device fingerprint stored with the vote for optional analysis.
+  // It is not a security boundary and does not block repeat voting.
+  async function getFingerprint(){
+    const parts = [
+      navigator.userAgent,
+      navigator.language,
+      (navigator.languages || []).join(','),
+      screen.width + 'x' + screen.height + 'x' + screen.colorDepth,
+      Intl.DateTimeFormat().resolvedOptions().timeZone,
+      navigator.hardwareConcurrency || '',
+      navigator.platform || '',
+    ];
+    try{
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      ctx.textBaseline = 'top';
+      ctx.font = "14px 'Arial'";
+      ctx.fillText('fp-seed-🗳️', 2, 2);
+      parts.push(canvas.toDataURL());
+    }catch(e){ /* canvas blocked — fall back to the rest of the signals */ }
+
+    const str = parts.join('||');
+    const enc = new TextEncoder().encode(str);
+    const hashBuf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  function render(){
+    const one = allVotes.filter(v => v.choice === 'one').length;
+    const two = allVotes.filter(v => v.choice === 'two').length;
+    const total = one + two;
+    const pctA = total === 0 ? 50 : Math.round((one/total)*100);
+    const pctB = total === 0 ? 50 : 100 - pctA;
+
+    el.ropeFill.style.width = pctA + '%';
+    el.ropeMarker.style.left = pctA + '%';
+    el.pctA.textContent = pctA + '%';
+    el.pctB.textContent = pctB + '%';
+    el.bigPctA.textContent = total === 0 ? '–' : pctA + '%';
+    el.bigPctB.textContent = total === 0 ? '–' : pctB + '%';
+    el.votesA.textContent = one + (one === 1 ? ' vote' : ' votes');
+    el.votesB.textContent = two + (two === 1 ? ' vote' : ' votes');
+    el.totalVotes.textContent = total;
+
+    el.btnA.classList.toggle('voted-for', myVote?.choice === 'one');
+    el.btnB.classList.toggle('voted-for', myVote?.choice === 'two');
+    el.checkA.style.visibility = myVote?.choice === 'one' ? 'visible' : 'hidden';
+    el.checkB.style.visibility = myVote?.choice === 'two' ? 'visible' : 'hidden';
+    el.resetBtn.style.display = myVote ? 'block' : 'none';
+
+    el.subline.textContent = myVote
+      ? "Thanks for voting — you can change your mind any time."
+      : "Pick your county, then cast your vote.";
+  }
+
+  async function castVote(choice){
+    if(!uid){ setStatus('Still connecting — try again in a second.'); return; }
+    const county = countySelect.value;
+    if(!county){ setStatus('Select a county first.'); return; }
+
+    const finalChoice = (myVote?.choice === choice) ? null : choice;
+    setStatus('Saving…');
+    try{
+      if(finalChoice === null){
+        await deleteVoteDirect();
+        myVote = null;
+      }else{
+        if(!fingerprint) fingerprint = await getFingerprint();
+        await saveVoteDirect(finalChoice, county);
+        myVote = { choice: finalChoice, county };
+      }
+      setStatus('');
+    }catch(e){
+      console.error(e);
+      setStatus('Could not save your vote — check Firebase Authentication and Firestore rules.');
+    }
+  }
+
+  el.btnA.addEventListener('click', () => castVote('one'));
+  el.btnB.addEventListener('click', () => castVote('two'));
+  el.resetBtn.addEventListener('click', async () => {
+    if(!myVote || !uid) return;
+    setStatus('Clearing…');
+    try{
+      await deleteVoteDirect();
+      myVote = null;
+      setStatus('');
+      render();
+    }catch(e){
+      console.error(e);
+      setStatus('Could not clear your vote.');
+    }
+  });
+
+  countySelect.addEventListener('change', () => {
+    const ready = !!countySelect.value;
+    el.btnA.disabled = !ready;
     el.btnB.disabled = !ready;
   });
 
@@ -135,6 +421,3 @@ More actions
 
 </body>
 </html>
-
-
-
