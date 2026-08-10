@@ -3,7 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>One Term or Two?</title>
+<title>One Term or Two? — Live Public Poll</title>
+
+<!-- ───────────────────────────────────────────────────────────
+     BASIC SEO
+     ─────────────────────────────────────────────────────────── -->
+<meta name="description" content="One term or two? Cast your vote in this live public poll and see real-time results broken down by county.">
+<meta name="author" content="One Term or Two?">
+<link rel="canonical" href="https://YOUR-DOMAIN-HERE.com/">
+
+<!-- ───────────────────────────────────────────────────────────
+     FAVICON — inline SVG, no external file needed.
+     A simple split circle in the poll's two brand colors.
+     ─────────────────────────────────────────────────────────── -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23eef1f0'/%3E%3Cpath d='M50 2a48 48 0 0 0 0 96z' fill='%231f6f78'/%3E%3Cpath d='M50 2a48 48 0 0 1 0 96z' fill='%23b5502e'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%2316221f'/%3E%3C/svg%3E">
+<!-- Optional: replace with a real favicon.ico / apple-touch-icon once you have a hosted image -->
+<!-- <link rel="apple-touch-icon" href="https://YOUR-DOMAIN-HERE.com/apple-touch-icon.png"> -->
+
+<!-- ───────────────────────────────────────────────────────────
+     LINK PREVIEW / SHARE CARD — Open Graph (Facebook, TikTok,
+     WhatsApp, LinkedIn, Slack, etc.)
+     Replace og:url and og:image with real hosted values once
+     this page is live — most platforms won't render a preview
+     image from a data URI, it needs a real hosted image URL.
+     ─────────────────────────────────────────────────────────── -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="One Term or Two?">
+<meta property="og:title" content="One Term or Two? — Live Public Poll">
+<meta property="og:description" content="Cast your vote and watch the live results tug back and forth, broken down by county.">
+<meta property="og:url" content="https://YOUR-DOMAIN-HERE.com/">
+<meta property="og:image" content="https://YOUR-DOMAIN-HERE.com/preview-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="One Term or Two? — Live Public Poll">
+<meta name="twitter:description" content="Cast your vote and watch the live results tug back and forth, broken down by county.">
+<meta name="twitter:image" content="https://YOUR-DOMAIN-HERE.com/preview-image.png">
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -44,6 +83,16 @@
   }
 
   .sub{ text-align:center; color:#495650; font-size:15px; margin-bottom:24px; }
+
+  .nav-row{
+    display:flex; justify-content:center; margin-bottom:20px;
+  }
+  .nav-link{
+    font-size:13px; font-weight:600; color:var(--side-a-deep);
+    text-decoration:none; border-bottom:1px solid transparent;
+    transition:border-color 0.15s ease;
+  }
+  .nav-link:hover{ border-color:var(--side-a-deep); }
 
   .country-row{
     display:flex; justify-content:center; margin-bottom:28px;
@@ -126,6 +175,28 @@
     font-size:12px; color:#93a09b; text-decoration:underline; cursor:pointer;
   }
 
+  /* ── Follow us ───────────────────────────────────────────── */
+  .follow{
+    display:flex; flex-direction:column; align-items:center;
+    gap:10px; margin-top:36px; padding-top:24px; border-top:1px solid var(--line);
+  }
+  .follow-label{
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:#7a8682; font-weight:600;
+  }
+  .follow-icons{ display:flex; gap:14px; }
+  .follow-icons a{
+    width:40px; height:40px; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink); box-shadow:0 1px 2px rgba(0,0,0,0.08);
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .follow-icons a:hover{
+    transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,0.12);
+    background:var(--ink); color:#fff;
+  }
+  .follow-icons svg{ width:19px; height:19px; fill:currentColor; }
+
   @media (max-width:480px){ .options{ grid-template-columns:1fr; } }
 </style>
 </head>
@@ -135,6 +206,9 @@
   <div class="eyebrow">Live public poll</div>
   <h1>One Term<br>or Two?</h1>
   <p class="sub" id="subline">Cast your vote — every visitor gets one pull on the rope.</p>
+  <div class="nav-row">
+    <a href="results.html" class="nav-link">View poll results →</a>
+  </div>
 
   <div class="country-row">
     <select class="country-select" id="countrySelect">
@@ -171,9 +245,30 @@
   <div class="footnote">Your county and choice are stored so results can be broken down by region. This version uses anonymous Firebase Auth and direct Firestore writes — no login or server required.</div>
   <div class="status" id="status"></div>
   <button class="reset" id="resetBtn" style="display:none;">clear my vote</button>
+
+  <!-- ── Follow us ─────────────────────────────────────────── -->
+  <div class="follow">
+    <div class="follow-label">Follow us</div>
+    <div class="follow-icons">
+      <!-- Replace href="#" with your real TikTok profile URL -->
+      <a href="#" id="tiktokLink" aria-label="Follow us on TikTok" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24"><path d="M16.6 5.82c-1-.87-1.6-2.13-1.6-3.52h-3.1v13.5a2.9 2.9 0 1 1-2.05-2.77V9.94a6 6 0 1 0 5.15 5.94V9.6a7.24 7.24 0 0 0 4.1 1.27V7.77c-.87 0-1.7-.28-2.5-.72-.01 0-.01-.02 0 0z"/></svg>
+      </a>
+      <!-- Replace href="#" with your real Facebook page URL -->
+      <a href="#" id="facebookLink" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.9h2.66l.4-3.1h-3.06V8.1c0-.9.25-1.5 1.53-1.5h1.63V3.8c-.28-.04-1.25-.12-2.38-.12-2.35 0-3.96 1.44-3.96 4.08v2.24H7.75v3.1h2.57V21h3.18z"/></svg>
+      </a>
+    </div>
+  </div>
 </div>
 
 <script type="module">
+  // ─────────────────────────────────────────────────────────────
+  // SOCIAL LINKS — paste your real profile URLs here once you have them.
+  // ─────────────────────────────────────────────────────────────
+  document.getElementById('tiktokLink').href = "https://www.tiktok.com/@YOUR_HANDLE"; // TODO: send me your TikTok URL
+  document.getElementById('facebookLink').href = "https://www.facebook.com/bettunknowncelebrity";
+
   // ─────────────────────────────────────────────────────────────
   // FIREBASE CONFIG — paste your project's config object here.
   // Firebase console → Project settings → General → Your apps → SDK setup
