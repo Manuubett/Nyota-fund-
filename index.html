@@ -231,6 +231,23 @@
     font-size:12px; color:#93a09b; text-decoration:underline; cursor:pointer;
   }
 
+  /* ── Screenshot capture area ────────────────────────────────── */
+  .capture-area{
+    background:var(--paper);
+    padding:18px;
+    border-radius:16px;
+  }
+  .capture-title{
+    display:none;
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:900; font-size:22px; text-align:center;
+    color:var(--ink); margin-bottom:18px;
+  }
+  .capture-area.capturing{
+    box-shadow:0 0 0 1px var(--line);
+  }
+  .capture-area.capturing .capture-title{ display:block; }
+
   /* ── Share / invite ──────────────────────────────────────── */
   .share{
     display:flex; flex-direction:column; align-items:center;
@@ -253,8 +270,10 @@
   .share-btn:active{ transform:translateY(0px); }
   .share-btn svg{ width:16px; height:16px; fill:currentColor; }
   .share-btn.whatsapp{ background:#25D366; color:#fff; }
+  .share-btn.tiktok{ background:#000; color:#fff; }
   .share-btn.copy{ background:#fff; color:var(--ink); border:1px solid var(--line); }
   .share-btn.copy.copied{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .share-btn.working{ opacity:0.65; pointer-events:none; }
 
   /* ── Follow us ───────────────────────────────────────────── */
   .follow{
@@ -306,31 +325,34 @@
     </select>
   </div>
 
-  <div class="rope-track">
-    <div class="rope-fill" id="ropeFill"></div>
-    <div class="rope-marker" id="ropeMarker"></div>
-  </div>
-  <div class="split-count">
-    <span id="pctA">50%</span>
-    <span id="pctB">50%</span>
-  </div>
+  <div id="captureArea" class="capture-area">
+    <div class="capture-title">One Term or Two? — Let's vote!</div>
+    <div class="rope-track">
+      <div class="rope-fill" id="ropeFill"></div>
+      <div class="rope-marker" id="ropeMarker"></div>
+    </div>
+    <div class="split-count">
+      <span id="pctA">50%</span>
+      <span id="pctB">50%</span>
+    </div>
 
-  <div class="options">
-    <button class="option a" id="btnA" disabled>
-      <div class="check" id="checkA" style="visibility:hidden;">Your vote</div>
-      <div class="label">ONE TERM</div>
-      <div class="pct" id="bigPctA">–</div>
-      <div class="votes" id="votesA">– votes</div>
-    </button>
-    <button class="option b" id="btnB" disabled>
-      <div class="check" id="checkB" style="visibility:hidden;">Your vote</div>
-      <div class="label">TWO TERMS</div>
-      <div class="pct" id="bigPctB">–</div>
-      <div class="votes" id="votesB">– votes</div>
-    </button>
-  </div>
+    <div class="options">
+      <button class="option a" id="btnA" disabled>
+        <div class="check" id="checkA" style="visibility:hidden;">Your vote</div>
+        <div class="label">ONE TERM</div>
+        <div class="pct" id="bigPctA">–</div>
+        <div class="votes" id="votesA">– votes</div>
+      </button>
+      <button class="option b" id="btnB" disabled>
+        <div class="check" id="checkB" style="visibility:hidden;">Your vote</div>
+        <div class="label">TWO TERMS</div>
+        <div class="pct" id="bigPctB">–</div>
+        <div class="votes" id="votesB">– votes</div>
+      </button>
+    </div>
 
-  <div class="total-line"><strong id="totalVotes">0</strong> total votes so far</div>
+    <div class="total-line"><strong id="totalVotes">0</strong> total votes so far</div>
+  </div>
   <div class="footnote">Your county and choice are stored so results can be broken down by region. This version uses anonymous Firebase Auth and direct Firestore writes — no login or server required.</div>
   <div class="status" id="status"></div>
   <button class="reset" id="resetBtn" style="display:none;">clear my vote</button>
@@ -343,6 +365,10 @@
         <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.39a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.1c-.24.68-1.38 1.32-1.9 1.4-.5.08-1.05.11-2.4-.51-3.98-1.6-6.55-5.63-6.74-5.89-.2-.26-1.6-2.13-1.6-4.07s1.02-2.9 1.38-3.3c.36-.4.79-.5 1.06-.5.26 0 .53 0 .76.01.24.01.57-.09.9.69.32.77 1.1 2.66 1.19 2.86.1.19.16.42.03.68-.12.26-.19.42-.38.65-.19.23-.4.5-.57.68-.19.19-.39.4-.17.78.22.39.98 1.62 2.11 2.63 1.45 1.29 2.67 1.69 3.06 1.88.39.19.61.16.84-.1.24-.26 1-1.16 1.27-1.56.26-.39.53-.32.9-.19.36.13 2.29 1.08 2.68 1.28.39.19.65.29.75.46.1.16.1.94-.14 1.62z"/></svg>
         <span>WhatsApp</span>
       </a>
+      <button type="button" id="tiktokShareBtn" class="share-btn tiktok">
+        <svg viewBox="0 0 24 24"><path d="M16.6 5.82c-1-.87-1.6-2.13-1.6-3.52h-3.1v13.5a2.9 2.9 0 1 1-2.05-2.77V9.94a6 6 0 1 0 5.15 5.94V9.6a7.24 7.24 0 0 0 4.1 1.27V7.77c-.87 0-1.7-.28-2.5-.72-.01 0-.01-.02 0 0z"/></svg>
+        <span id="tiktokShareLabel">Share on TikTok</span>
+      </button>
       <button type="button" id="copyLinkBtn" class="share-btn copy">
         <svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
         <span id="copyLinkLabel">Copy link</span>
@@ -366,6 +392,7 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script type="module">
   // ─────────────────────────────────────────────────────────────
   // SOCIAL LINKS — paste your real profile URLs here once you have them.
@@ -404,6 +431,78 @@
       copyBtn.classList.remove('copied');
       copyLabel.textContent = 'Copy link';
     }, 1800);
+  });
+
+  // ─────────────────────────────────────────────────────────────
+  // SHARE ON TIKTOK — screenshot the live results card, then hand
+  // the image to the device's native share sheet so the person can
+  // pick TikTok and post it straight in with the image attached.
+  // TikTok has no public web API for pre-filling a post with an
+  // image, so the native share sheet (Web Share API, files) is the
+  // closest equivalent on web. If that isn't available, the image
+  // downloads instead and TikTok opens so it can be attached by hand.
+  // ─────────────────────────────────────────────────────────────
+  const tiktokBtn = document.getElementById('tiktokShareBtn');
+  const tiktokLabel = document.getElementById('tiktokShareLabel');
+  const captureArea = document.getElementById('captureArea');
+
+  async function captureResultsImage(){
+    captureArea.classList.add('capturing');
+    try{
+      const canvas = await html2canvas(captureArea, {
+        backgroundColor: '#eef1f0',
+        scale: 2,
+        useCORS: true
+      });
+      return await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    } finally {
+      captureArea.classList.remove('capturing');
+    }
+  }
+
+  tiktokBtn.addEventListener('click', async () => {
+    if(typeof html2canvas === 'undefined'){
+      window.open('https://www.tiktok.com/upload', '_blank', 'noopener');
+      return;
+    }
+
+    tiktokBtn.classList.add('working');
+    tiktokLabel.textContent = 'Capturing…';
+
+    try{
+      const blob = await captureResultsImage();
+      const file = new File([blob], 'one-term-or-two-results.png', { type: 'image/png' });
+
+      if(navigator.canShare && navigator.canShare({ files: [file] })){
+        // Native share sheet: person picks TikTok from the list and the
+        // screenshot arrives already attached.
+        await navigator.share({
+          files: [file],
+          title: 'One Term or Two?',
+          text: SHARE_TEXT + ' ' + SITE_URL
+        });
+      } else {
+        // Desktop / unsupported browsers: download the screenshot, then
+        // open TikTok's upload page for a manual attach.
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'one-term-or-two-results.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        window.open('https://www.tiktok.com/upload', '_blank', 'noopener');
+      }
+    }catch(e){
+      if(e?.name !== 'AbortError'){
+        console.error(e);
+        setStatus('Could not prepare the TikTok screenshot.');
+      }
+    } finally {
+      tiktokBtn.classList.remove('working');
+      tiktokLabel.textContent = 'Share on TikTok';
+    }
   });
 
   // ─────────────────────────────────────────────────────────────
