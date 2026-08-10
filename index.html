@@ -8,7 +8,7 @@
 <!-- ───────────────────────────────────────────────────────────
      BASIC SEO
      ─────────────────────────────────────────────────────────── -->
-<meta name="description" content="One term or two? Cast your vote in this live public poll and see real-time results broken down by county.">
+<meta name="description" content="Battle between one term and two terms — let's vote! Live public poll with real-time results by county.">
 <meta name="author" content="One Term or Two?">
 <link rel="canonical" href="https://YOUR-DOMAIN-HERE.com/">
 
@@ -30,17 +30,18 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="One Term or Two?">
 <meta property="og:title" content="One Term or Two? — Live Public Poll">
-<meta property="og:description" content="Cast your vote and watch the live results tug back and forth, broken down by county.">
+<meta property="og:description" content="Battle between one term and two terms — let's vote!">
 <meta property="og:url" content="https://YOUR-DOMAIN-HERE.com/">
 <meta property="og:image" content="https://YOUR-DOMAIN-HERE.com/preview-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="One Term vs Two Terms — live public poll, let's vote!">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter / X card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="One Term or Two? — Live Public Poll">
-<meta name="twitter:description" content="Cast your vote and watch the live results tug back and forth, broken down by county.">
+<meta name="twitter:description" content="Battle between one term and two terms — let's vote!">
 <meta name="twitter:image" content="https://YOUR-DOMAIN-HERE.com/preview-image.png">
 
 <style>
@@ -85,14 +86,69 @@
   .sub{ text-align:center; color:#495650; font-size:15px; margin-bottom:24px; }
 
   .nav-row{
-    display:flex; justify-content:center; margin-bottom:20px;
+    display:flex; justify-content:center; margin-bottom:26px;
   }
-  .nav-link{
-    font-size:13px; font-weight:600; color:var(--side-a-deep);
-    text-decoration:none; border-bottom:1px solid transparent;
-    transition:border-color 0.15s ease;
+  .results-card{
+    position:relative;
+    display:flex; align-items:center; gap:14px;
+    padding:14px 22px;
+    border-radius:14px;
+    background:linear-gradient(90deg, var(--side-a-deep), var(--side-a) 48%, var(--side-b) 52%, var(--side-b-deep));
+    color:#fff;
+    text-decoration:none;
+    font-family:'Inter', sans-serif;
+    box-shadow:0 4px 14px rgba(22,34,31,0.18);
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
   }
-  .nav-link:hover{ border-color:var(--side-a-deep); }
+  .results-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(22,34,31,0.24);
+  }
+  .results-card:active{ transform:translateY(0px); }
+  .results-card .pulse-dot{
+    width:9px; height:9px; border-radius:50%;
+    background:#ff5a4e;
+    box-shadow:0 0 0 rgba(255,90,78,0.6);
+    animation:pulse 1.8s infinite;
+    flex-shrink:0;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,90,78,0.55); }
+    70%{ box-shadow:0 0 0 8px rgba(255,90,78,0); }
+    100%{ box-shadow:0 0 0 0 rgba(255,90,78,0); }
+  }
+  .results-card .text-block{ text-align:left; line-height:1.25; }
+  .results-card .text-block .top{
+    font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    font-weight:700; opacity:0.85;
+  }
+  .results-card .text-block .main{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:900; font-size:20px; letter-spacing:0.01em;
+  }
+  .results-card .arrow{
+    font-size:20px; margin-left:2px;
+    transition:transform 0.15s ease;
+  }
+  .results-card:hover .arrow{ transform:translateX(4px); }
+
+  .results-card.disabled{
+    background:var(--line);
+    color:#8b9691;
+    box-shadow:none;
+    cursor:not-allowed;
+    pointer-events:none;
+    filter:grayscale(0.4);
+  }
+  .results-card.disabled .pulse-dot{
+    background:#9aa5a1; animation:none; box-shadow:none;
+  }
+  .results-card.disabled .text-block .top{ opacity:0.7; }
+
+  .results-hint{
+    text-align:center; font-size:12px; color:#8b9691;
+    margin-top:-16px; margin-bottom:26px; font-weight:500;
+  }
 
   .country-row{
     display:flex; justify-content:center; margin-bottom:28px;
@@ -207,8 +263,16 @@
   <h1>One Term<br>or Two?</h1>
   <p class="sub" id="subline">Cast your vote — every visitor gets one pull on the rope.</p>
   <div class="nav-row">
-    <a href="results.html" class="nav-link">View poll results →</a>
+    <a href="results.html" class="results-card disabled" id="resultsCard" aria-disabled="true">
+      <span class="pulse-dot"></span>
+      <span class="text-block">
+        <span class="top">Live now</span>
+        <span class="main">View Live Results</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
   </div>
+  <div class="results-hint" id="resultsHint">Vote to unlock live results</div>
 
   <div class="country-row">
     <select class="country-select" id="countrySelect">
@@ -334,6 +398,8 @@
     subline: document.getElementById('subline'),
     resetBtn: document.getElementById('resetBtn'),
     status: document.getElementById('status'),
+    resultsCard: document.getElementById('resultsCard'),
+    resultsHint: document.getElementById('resultsHint'),
   };
 
   let app, auth, db, uid = null;
@@ -416,6 +482,13 @@
     el.subline.textContent = myVote
       ? "Thanks for voting — you can change your mind any time."
       : "Pick your county, then cast your vote.";
+
+    const hasVoted = !!myVote;
+    el.resultsCard.classList.toggle('disabled', !hasVoted);
+    el.resultsCard.setAttribute('aria-disabled', String(!hasVoted));
+    if(!hasVoted) el.resultsCard.removeAttribute('href');
+    else el.resultsCard.setAttribute('href', 'results.html');
+    el.resultsHint.style.display = hasVoted ? 'none' : 'block';
   }
 
   async function castVote(choice){
