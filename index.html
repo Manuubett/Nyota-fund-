@@ -10,7 +10,7 @@
      ─────────────────────────────────────────────────────────── -->
 <meta name="description" content="Battle between one term and two terms — let's vote! Live public poll with real-time results by county.">
 <meta name="author" content="One Term or Two?">
-<link rel="canonical" href="https://YOUR-DOMAIN-HERE.com/">
+<link rel="canonical" href="https://politics.bett.website/">
 
 <!-- ───────────────────────────────────────────────────────────
      FAVICON — inline SVG, no external file needed.
@@ -18,21 +18,21 @@
      ─────────────────────────────────────────────────────────── -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23eef1f0'/%3E%3Cpath d='M50 2a48 48 0 0 0 0 96z' fill='%231f6f78'/%3E%3Cpath d='M50 2a48 48 0 0 1 0 96z' fill='%23b5502e'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%2316221f'/%3E%3C/svg%3E">
 <!-- Optional: replace with a real favicon.ico / apple-touch-icon once you have a hosted image -->
-<!-- <link rel="apple-touch-icon" href="https://YOUR-DOMAIN-HERE.com/apple-touch-icon.png"> -->
+<!-- <link rel="apple-touch-icon" href="https://politics.bett.website/apple-touch-icon.png"> -->
 
 <!-- ───────────────────────────────────────────────────────────
      LINK PREVIEW / SHARE CARD — Open Graph (Facebook, TikTok,
      WhatsApp, LinkedIn, Slack, etc.)
-     Replace og:url and og:image with real hosted values once
-     this page is live — most platforms won't render a preview
-     image from a data URI, it needs a real hosted image URL.
+     Live URL: https://politics.bett.website/
+     Upload preview-image.png to the site root so it resolves at
+     https://politics.bett.website/preview-image.png
      ─────────────────────────────────────────────────────────── -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="One Term or Two?">
 <meta property="og:title" content="One Term or Two? — Live Public Poll">
 <meta property="og:description" content="Battle between one term and two terms — let's vote!">
-<meta property="og:url" content="https://YOUR-DOMAIN-HERE.com/">
-<meta property="og:image" content="https://YOUR-DOMAIN-HERE.com/preview-image.png">
+<meta property="og:url" content="https://politics.bett.website/">
+<meta property="og:image" content="https://politics.bett.website/preview-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="One Term vs Two Terms — live public poll, let's vote!">
@@ -42,7 +42,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="One Term or Two? — Live Public Poll">
 <meta name="twitter:description" content="Battle between one term and two terms — let's vote!">
-<meta name="twitter:image" content="https://YOUR-DOMAIN-HERE.com/preview-image.png">
+<meta name="twitter:image" content="https://politics.bett.website/preview-image.png">
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap');
@@ -231,10 +231,35 @@
     font-size:12px; color:#93a09b; text-decoration:underline; cursor:pointer;
   }
 
+  /* ── Share / invite ──────────────────────────────────────── */
+  .share{
+    display:flex; flex-direction:column; align-items:center;
+    gap:10px; margin-top:30px;
+  }
+  .share-label{
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:#7a8682; font-weight:600;
+  }
+  .share-row{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .share-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 16px; border-radius:10px; border:none;
+    font-family:'Inter', sans-serif; font-size:13px; font-weight:600;
+    cursor:pointer; text-decoration:none;
+    box-shadow:0 1px 2px rgba(0,0,0,0.08);
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .share-btn:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,0.12); }
+  .share-btn:active{ transform:translateY(0px); }
+  .share-btn svg{ width:16px; height:16px; fill:currentColor; }
+  .share-btn.whatsapp{ background:#25D366; color:#fff; }
+  .share-btn.copy{ background:#fff; color:var(--ink); border:1px solid var(--line); }
+  .share-btn.copy.copied{ background:var(--ink); color:#fff; border-color:var(--ink); }
+
   /* ── Follow us ───────────────────────────────────────────── */
   .follow{
     display:flex; flex-direction:column; align-items:center;
-    gap:10px; margin-top:36px; padding-top:24px; border-top:1px solid var(--line);
+    gap:10px; margin-top:24px; padding-top:24px; border-top:1px solid var(--line);
   }
   .follow-label{
     font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
@@ -310,6 +335,21 @@
   <div class="status" id="status"></div>
   <button class="reset" id="resetBtn" style="display:none;">clear my vote</button>
 
+  <!-- ── Share / invite others ────────────────────────────────── -->
+  <div class="share">
+    <div class="share-label">Invite others to vote</div>
+    <div class="share-row">
+      <a href="#" id="whatsappShare" class="share-btn whatsapp" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.39a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.1c-.24.68-1.38 1.32-1.9 1.4-.5.08-1.05.11-2.4-.51-3.98-1.6-6.55-5.63-6.74-5.89-.2-.26-1.6-2.13-1.6-4.07s1.02-2.9 1.38-3.3c.36-.4.79-.5 1.06-.5.26 0 .53 0 .76.01.24.01.57-.09.9.69.32.77 1.1 2.66 1.19 2.86.1.19.16.42.03.68-.12.26-.19.42-.38.65-.19.23-.4.5-.57.68-.19.19-.39.4-.17.78.22.39.98 1.62 2.11 2.63 1.45 1.29 2.67 1.69 3.06 1.88.39.19.61.16.84-.1.24-.26 1-1.16 1.27-1.56.26-.39.53-.32.9-.19.36.13 2.29 1.08 2.68 1.28.39.19.65.29.75.46.1.16.1.94-.14 1.62z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <button type="button" id="copyLinkBtn" class="share-btn copy">
+        <svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+        <span id="copyLinkLabel">Copy link</span>
+      </button>
+    </div>
+  </div>
+
   <!-- ── Follow us ─────────────────────────────────────────── -->
   <div class="follow">
     <div class="follow-label">Follow us</div>
@@ -332,6 +372,39 @@
   // ─────────────────────────────────────────────────────────────
   document.getElementById('tiktokLink').href = "https://www.tiktok.com/@YOUR_HANDLE"; // TODO: send me your TikTok URL
   document.getElementById('facebookLink').href = "https://www.facebook.com/bettunknowncelebrity";
+
+  // ─────────────────────────────────────────────────────────────
+  // SHARE / INVITE — WhatsApp share + copy link
+  // ─────────────────────────────────────────────────────────────
+  const SITE_URL = "https://politics.bett.website/";
+  const SHARE_TEXT = "One term or two? Battle between one term and two terms — let's vote!";
+
+  const whatsappBtn = document.getElementById('whatsappShare');
+  whatsappBtn.href = "https://wa.me/?text=" + encodeURIComponent(SHARE_TEXT + " " + SITE_URL);
+
+  const copyBtn = document.getElementById('copyLinkBtn');
+  const copyLabel = document.getElementById('copyLinkLabel');
+  copyBtn.addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(SITE_URL);
+    }catch(e){
+      // Fallback for browsers without Clipboard API access
+      const ta = document.createElement('textarea');
+      ta.value = SITE_URL;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    copyBtn.classList.add('copied');
+    copyLabel.textContent = 'Copied!';
+    setTimeout(() => {
+      copyBtn.classList.remove('copied');
+      copyLabel.textContent = 'Copy link';
+    }, 1800);
+  });
 
   // ─────────────────────────────────────────────────────────────
   // FIREBASE CONFIG — paste your project's config object here.
