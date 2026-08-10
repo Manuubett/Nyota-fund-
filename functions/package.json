@@ -1,0 +1,13 @@
+{
+  "name": "poll-functions",
+  "description": "Cloud Functions backing the One Term or Two poll",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "private": true
+}
