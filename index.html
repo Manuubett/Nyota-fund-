@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safaricom SMS Test Console — TalkSasa</title>
+<style>
+  :root{
+    --ink:#12261e;
+    --paper:#eef2ea;
+    --green-deep:#0b3d2e;
+    --green-mid:#1f6b4a;
+    --safaricom:#3aa635;
+    --amber:#c47a1f;
+    --line:#c8d3c4;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:linear-gradient(180deg, var(--paper) 0%, #e6ece1 100%);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+    padding:32px 16px 64px;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+
+  .signal{display:flex;align-items:flex-end;gap:3px;height:18px;margin-bottom:14px;}
+  .signal span{width:4px;background:var(--safaricom);border-radius:1px;opacity:.35;}
+  .signal span:nth-child(1){height:30%;}
+  .signal span:nth-child(2){height:55%;}
+  .signal span:nth-child(3){height:75%;}
+  .signal span:nth-child(4){height:100%;}
+  .signal.live span{opacity:1;animation:pulse 1.4s ease-in-out infinite;}
+  .signal.live span:nth-child(2){animation-delay:.15s;}
+  .signal.live span:nth-child(3){animation-delay:.3s;}
+  .signal.live span:nth-child(4){animation-delay:.45s;}
+  @keyframes pulse{0%,100%{opacity:.35;}50%{opacity:1;}}
+
+  header{margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:20px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-mid);margin:0 0 8px;}
+  h1{font-size:28px;line-height:1.15;margin:0 0 8px;letter-spacing:-.01em;font-weight:700;color:var(--green-deep);}
+  .sub{margin:0;color:#4a5c50;font-size:14.5px;max-width:52ch;}
+
+  .status-strip{
+    display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;
+    color:#4a5c50;margin-top:14px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:#b5b5b5;flex-shrink:0;}
+  .dot.up{background:var(--safaricom);}
+  .dot.down{background:#c0392b;}
+
+  .card{background:#fbfdf9;border:1px solid var(--line);border-radius:10px;padding:22px;margin-bottom:16px;}
+  .card h2{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-family:var(--mono);color:var(--green-mid);margin:0 0 16px;display:flex;align-items:center;gap:8px;}
+  .card h2::before{content:'';width:6px;height:6px;background:var(--safaricom);border-radius:50%;display:inline-block;}
+
+  label{display:block;font-size:12.5px;font-weight:600;color:var(--green-deep);margin-bottom:5px;}
+  .hint{font-size:12px;color:#6b7d70;margin-top:5px;line-height:1.4;}
+  .row{margin-bottom:16px;}
+  .row:last-child{margin-bottom:0;}
+
+  input[type=text], textarea{
+    width:100%;border:1.5px solid var(--line);border-radius:7px;
+    padding:10px 12px;font-family:var(--mono);font-size:13.5px;
+    background:#fff;color:var(--ink);transition:border-color .15s;
+  }
+  input:focus, textarea:focus{outline:none;border-color:var(--safaricom);}
+  textarea{resize:vertical;min-height:90px;line-height:1.5;}
+
+  .charcount{display:flex;justify-content:space-between;font-size:11px;color:#7c8c80;margin-top:5px;font-family:var(--mono);}
+  .charcount.over{color:#b23a3a;}
+
+  button.send{
+    width:100%;background:var(--green-deep);color:#fff;border:none;border-radius:8px;
+    padding:14px;font-size:14.5px;font-weight:700;letter-spacing:.02em;cursor:pointer;
+    font-family:var(--sans);transition:background .15s, transform .1s;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  button.send:hover{background:var(--green-mid);}
+  button.send:active{transform:scale(.99);}
+  button.send:disabled{background:#9db3a3;cursor:not-allowed;}
+
+  .result{
+    margin-top:16px;border-radius:8px;padding:14px 16px;font-family:var(--mono);
+    font-size:12.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word;
+    display:none;
+  }
+  .result.show{display:block;}
+  .result.ok{background:#e9f5ea;border:1px solid #a9d4ad;color:var(--green-deep);}
+  .result.err{background:#fbeaea;border:1px solid #e0a9a9;color:#7a2424;}
+  .result .status-line{font-weight:700;margin-bottom:6px;text-transform:uppercase;font-size:11px;letter-spacing:.06em;}
+
+  .footnote{margin-top:22px;font-size:12px;color:#6b7d70;line-height:1.6;border-top:1px solid var(--line);padding-top:16px;}
+  .footnote b{color:var(--green-deep);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="signal" id="signal"><span></span><span></span><span></span><span></span></div>
+
+  <header>
+    <p class="eyebrow">TalkSasa · Gateway Test Console</p>
+    <h1>Send a test SMS to a Safaricom number</h1>
+    <p class="sub">This page talks to your own server, which holds the API key and forwards the request to TalkSasa. Your key never touches the browser.</p>
+    <div class="status-strip"><span class="dot" id="statusDot"></span><span id="statusText">Checking server…</span></div>
+  </header>
+
+  <form id="smsForm">
+    <div class="card">
+      <h2>Message</h2>
+      <div class="row">
+        <label for="senderId">Sender ID <span style="font-weight:400;color:#6b7d70;">(optional — leave blank to use the server default)</span></label>
+        <input type="text" id="senderId" placeholder="e.g. TalkSasa" maxlength="11">
+      </div>
+      <div class="row">
+        <label for="recipient">Recipient number</label>
+        <input type="text" id="recipient" placeholder="07XXXXXXXX or 2547XXXXXXXX" required>
+        <p class="hint" id="numberHint">Enter a Safaricom number — it'll be auto-formatted.</p>
+      </div>
+      <div class="row">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Type your test message..." maxlength="459" required></textarea>
+        <div class="charcount" id="charcount">0 / 160 · 1 SMS part</div>
+      </div>
+    </div>
+
+    <button type="submit" class="send" id="sendBtn">
+      <span id="sendLabel">Send test SMS</span>
+    </button>
+
+    <div class="result" id="result"></div>
+  </form>
+
+  <p class="footnote">
+    <b>Note:</b> Set <code>TALKSASA_API_KEY</code> (and optionally <code>TALKSASA_SENDER_ID</code>, <code>TALKSASA_SEND_PATH</code>) as environment variables on your Render service — never in this page or the repo.
+  </p>
+</div>
+
+<script>
+const form = document.getElementById('smsForm');
+const messageEl = document.getElementById('message');
+const charcount = document.getElementById('charcount');
+const recipientEl = document.getElementById('recipient');
+const numberHint = document.getElementById('numberHint');
+const resultEl = document.getElementById('result');
+const sendBtn = document.getElementById('sendBtn');
+const sendLabel = document.getElementById('sendLabel');
+const signal = document.getElementById('signal');
+const statusDot = document.getElementById('statusDot');
+const statusText = document.getElementById('statusText');
+
+fetch('https://cbe-webhook.onrender.com/api/health').then(r => r.json()).then(data => {
+  if (data.apiKeyConfigured) {
+    statusDot.classList.add('up');
+    statusText.textContent = `Server ready · sending via ${data.baseUrl}`;
+  } else {
+    statusDot.classList.add('down');
+    statusText.textContent = 'Server is up but TALKSASA_API_KEY is not set yet.';
+  }
+}).catch(() => {
+  statusDot.classList.add('down');
+  statusText.textContent = 'Could not reach the server.';
+});
+
+messageEl.addEventListener('input', () => {
+  const len = messageEl.value.length;
+  const parts = len === 0 ? 1 : (len <= 160 ? 1 : Math.ceil(len / 153));
+  charcount.textContent = `${len} / 160 · ${parts} SMS part${parts > 1 ? 's' : ''}`;
+  charcount.classList.toggle('over', len > 160);
+});
+
+const SAFARICOM_PREFIXES = ['70','71','72','74','79','110','111','112','113','114','115'];
+function normalizeKenyanNumber(raw) {
+  let n = raw.replace(/[\s\-+]/g, '');
+  if (n.startsWith('0')) n = '254' + n.slice(1);
+  else if (n.length === 9) n = '254' + n;
+  return n;
+}
+function looksLikeSafaricom(e164) {
+  const local = e164.startsWith('254') ? e164.slice(3) : e164;
+  return SAFARICOM_PREFIXES.some(p => local.startsWith(p));
+}
+
+recipientEl.addEventListener('blur', () => {
+  const val = recipientEl.value.trim();
+  if (!val) return;
+  const normalized = normalizeKenyanNumber(val);
+  if (/^254\d{9}$/.test(normalized)) {
+    recipientEl.value = normalized;
+    numberHint.textContent = looksLikeSafaricom(normalized)
+      ? `Formatted as ${normalized} — looks like a Safaricom number.`
+      : `Formatted as ${normalized} — prefix doesn't match common Safaricom ranges, double-check it.`;
+  } else {
+    numberHint.textContent = 'Expecting 10 digits starting with 0, or 12 digits starting with 254.';
+  }
+});
+
+function showResult(ok, text) {
+  resultEl.className = 'result show ' + (ok ? 'ok' : 'err');
+  resultEl.innerHTML = `<div class="status-line">${ok ? 'Sent' : 'Failed'}</div>${text}`;
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  sendBtn.disabled = true;
+  sendLabel.textContent = 'Sending…';
+  signal.classList.add('live');
+  resultEl.classList.remove('show');
+
+  try {
+    const res = await fetch('https://cbe-webhook.onrender.com/api/send-sms', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        recipient: recipientEl.value.trim(),
+        message: messageEl.value,
+        sender_id: document.getElementById('senderId').value.trim() || undefined
+      })
+    });
+    const data = await res.json();
+    const lines = [];
+    if (data.warning) lines.push(`⚠ ${data.warning}`);
+    if (data.sentTo) lines.push(`To: ${data.sentTo}`);
+    lines.push(JSON.stringify(data.response ?? data.error ?? data, null, 2));
+    showResult(res.ok && data.ok !== false, lines.join('\n'));
+  } catch (err) {
+    showResult(false, `Request failed: ${err.message}`);
+  } finally {
+    sendBtn.disabled = false;
+    sendLabel.textContent = 'Send test SMS';
+    signal.classList.remove('live');
+  }
+});
+</script>
+</body>
+</html>
