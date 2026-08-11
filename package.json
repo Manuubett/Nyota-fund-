@@ -1,14 +1,15 @@
 {
-  "name": "political-poll-api",
+  "name": "talksasa-sms-console",
   "version": "1.0.0",
-  "description": "Voting API for political poll",
+  "description": "Server-proxied test console for sending SMS via the TalkSasa API",
   "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "firebase-admin": "^13.5.0"
+    "express": "^4.19.2"
   }
 }
